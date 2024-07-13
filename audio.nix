@@ -5,13 +5,13 @@
   ...
 }:
 
-# with lib;
+with lib;
 {
-  # options = {
-  # 	lowLatency = {
-  # 		enable = mkEnableOption "low latency";
-  # 	};
-  # };
+  options = {
+    audio.lowLatency = {
+      enable = mkEnableOption "low latency";
+    };
+  };
 
   config = {
     hardware.bluetooth = {
@@ -30,7 +30,7 @@
       # If you want to use JACK applications, uncomment this
       jack.enable = true;
 
-      wireplumber.extraconfig = {
+      wireplumber.extraConfig = {
         "monitor.bluez.properties" = {
           "bluez5.enable-sbc-xq" = true;
           "bluez5.enable-msbc" = true;
@@ -45,8 +45,8 @@
       };
 
       # configure extra low latency
-      # extraconfig.pipewire."92-low-latency" = mkIf lowLatency.enable {
-      extraconfig.pipewire."92-low-latency" = {
+      extraConfig.pipewire."92-low-latency" = mkIf config.audio.lowLatency.enable {
+        # extraConfig.pipewire."92-low-latency" = {
         context.properties = {
           default.clock.rate = 48000;
           default.clock.quantum = 32;
