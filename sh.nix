@@ -1,8 +1,8 @@
-{pkgs, config, ...}:
+{ pkgs, config, ... }:
 
 {
-	programs.zsh = {
-		enable = true;
-		loginShellInit = "Hyprland";
-	};
+  programs.zsh = {
+    enable = true;
+    loginShellInit = "Hyprland";
+  };
 }
