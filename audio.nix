@@ -8,13 +8,17 @@
 with lib;
 {
   options = {
-    audio.lowLatency = {
-      enable = mkEnableOption "low latency";
+    audio = {
+      enable = mkEnableOption "enable audio";
+      bluetooth.enable = mkEnableOption "enable bluetooth";
+      packages.enable = mkEnableOption "enable audio packages";
+      lowLatency.enable = mkEnableOption "low latency";
     };
   };
 
-  config = {
-    hardware.bluetooth = {
+  config = mkIf config.audio.enable {
+    # enable bluetooth
+    hardware.bluetooth = mkIf config.audio.bluetooth.enable {
       enable = true;
       powerOnBoot = true;
       settings.General.Enable = "Source,Sink,Media,Socket";
@@ -22,6 +26,9 @@ with lib;
 
     # rtkit is optional but recommended
     security.rtkit.enable = true;
+
+    # system packages
+    # pipewire
     services.pipewire = {
       enable = true;
       alsa.enable = true;
@@ -30,17 +37,20 @@ with lib;
       # If you want to use JACK applications, uncomment this
       jack.enable = true;
 
-      wireplumber.extraConfig = {
-        "monitor.bluez.properties" = {
-          "bluez5.enable-sbc-xq" = true;
-          "bluez5.enable-msbc" = true;
-          "bluez5.enable-hw-volume" = true;
-          "bluez5.roles" = [
-            "hsp_hs"
-            "hsp_ag"
-            "hfp_hf"
-            "hfp_ag"
-          ];
+      # configure for bluetooth
+      wireplumber = {
+        extraConfig = {
+          "monitor.bluez.properties" = {
+            "bluez5.enable-sbc-xq" = true;
+            "bluez5.enable-msbc" = true;
+            "bluez5.enable-hw-volume" = true;
+            "bluez5.roles" = [
+              "hsp_hs"
+              "hsp_ag"
+              "hfp_hf"
+              "hfp_ag"
+            ];
+          };
         };
       };
 
@@ -55,5 +65,14 @@ with lib;
         };
       };
     };
+
+    environment.systemPackages =
+      with pkgs;
+      mkIf config.audio.packages.enable [
+        wireplumber
+        pavucontrol
+        spotify
+        qpwgraph
+      ];
   };
 }
