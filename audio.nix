@@ -13,6 +13,7 @@ with lib;
       bluetooth.enable = mkEnableOption "enable bluetooth";
       packages.enable = mkEnableOption "enable audio packages";
       lowLatency.enable = mkEnableOption "low latency";
+      recordingSuite.enable = mkEnableOption "recording suite";
     };
   };
 
@@ -68,11 +69,15 @@ with lib;
 
     environment.systemPackages =
       with pkgs;
-      mkIf config.audio.packages.enable [
-        wireplumber
-        pavucontrol
-        spotify
-        qpwgraph
-      ];
+      let
+        audioPackages = mkIf config.audio.packages.enable [
+          wireplumber
+          pavucontrol
+          qpwgraph
+        ];
+        recordingSuitePackages = mkIf config.audio.recordingSuite.enable [ bottles ];
+      in
+      audioPackages ++ recordingSuitePackages;
   };
+
 }

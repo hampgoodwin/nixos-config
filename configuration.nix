@@ -39,6 +39,7 @@
     bluetooth.enable = true;
     packages.enable = true;
     lowLatency.enable = true;
+    recordingSuite.enable = true;
   };
   developer.enable = true;
 
