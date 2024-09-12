@@ -57,7 +57,6 @@ with lib;
 
       # configure extra low latency
       extraConfig.pipewire."92-low-latency" = mkIf config.audio.lowLatency.enable {
-        # extraConfig.pipewire."92-low-latency" = {
         context.properties = {
           default.clock.rate = 48000;
           default.clock.quantum = 32;
@@ -69,15 +68,13 @@ with lib;
 
     environment.systemPackages =
       with pkgs;
-      let
-        audioPackages = mkIf config.audio.packages.enable [
-          wireplumber
-          pavucontrol
-          qpwgraph
-        ];
-        recordingSuitePackages = mkIf config.audio.recordingSuite.enable [ bottles ];
-      in
-      audioPackages ++ recordingSuitePackages;
+      mkIf config.audio.packages.enable [
+        wireplumber
+        pavucontrol
+        qpwgraph
+        spotifyd
+        spotify-qt
+      ]
+      // mkIf config.audio.recordingSuite.enable [ bottles ];
   };
-
 }
