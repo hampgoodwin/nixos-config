@@ -19,10 +19,10 @@
     ./sh.nix
     ./hamp.nix
     ./hypr.nix
-    ./kde.nix
+    # ./kde.nix
     ./steam.nix
     ./sunshine.nix
-    ./eveloper.nix
+    ./developer.nix
   ];
 
   # Bootloader.
@@ -69,14 +69,13 @@
 
   # Configure keymap in X11
   services.xserver = {
-    enable = true;
     xkb.layout = "us";
     xkb.variant = "";
 
-    displayManager.sddd = {
-      enable = true;
-      wayland.enable = true;
-    };
+    # displayManager.sddm = {
+    #   enable = true;
+    #   wayland.enable = true;
+    # };
   };
 
   # Allow unfree packages
