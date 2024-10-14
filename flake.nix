@@ -19,5 +19,12 @@
         };
         modules = [ ./configuration.nix ];
       };
+      nixosConfigurations.latitude-7400 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [ ./configuration-latitude-7400.nix ];
+      };
     };
 }
