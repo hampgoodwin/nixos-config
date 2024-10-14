@@ -35,7 +35,7 @@
   user = {
     enable = true;
     name = "latitude-7400";
-  }
+  };
   # Audio from import
   audio = {
     enable = true;
