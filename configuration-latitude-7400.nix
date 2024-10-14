@@ -32,7 +32,10 @@
   # from import
   sh.enable = true;
   # latitude-7400 user from import
-  latitude-7400.user.enable = true;
+  user = {
+    enable = true;
+    name = "latitude-7400";
+  }
   # Audio from import
   audio = {
     enable = true;
