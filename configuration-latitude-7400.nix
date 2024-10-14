@@ -31,8 +31,8 @@
   # Shell, uses zsh
   # from import
   sh.enable = true;
-  # hamp use from import
-  hamp.user.enable = true;
+  # latitude-7400 user from import
+  latitude-7400.user.enable = true;
   # Audio from import
   audio = {
     enable = true;
@@ -41,7 +41,7 @@
     lowLatency.enable = true;
     recordingSuite.enable = false;
   };
-  # developer.enable = true;
+  developer.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
 
