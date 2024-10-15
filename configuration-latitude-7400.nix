@@ -40,6 +40,7 @@
   audio = {
     enable = true;
     bluetooth.enable = true;
+    bluetooth.powerOnBooth = true;
     packages.enable = true;
     lowLatency.enable = true;
     recordingSuite.enable = false;
