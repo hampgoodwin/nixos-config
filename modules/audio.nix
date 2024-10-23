@@ -72,9 +72,8 @@ with lib;
         wireplumber
         pavucontrol
         qpwgraph
-        spotifyd
+        spotify
         spotify-qt
-      ]
-      // mkIf config.audio.recordingSuite.enable [ bottles ];
+      ];
   };
 }

@@ -8,16 +8,11 @@
 with lib;
 {
   options = {
-    developer.enable = mkEnableOption "enable audio";
+    developer = {
+      enable = mkEnableOption "enable developer applications";
+    };
   };
   config = mkIf config.developer.enable {
-    programs = {
-      neovim = {
-        enable = true;
-        defaultEditor = true;
-      };
-    };
-
     environment.systemPackages = with pkgs; [
       # programming
       ## go
@@ -44,24 +39,27 @@ with lib;
       ## bash
       shellcheck
       nodePackages.bash-language-server
+
       # tools
+      ## build
       libgcc
       clang
       gnumake
+      ## command line
       ripgrep
       git
-      bat
-      kitty
-      zellij
       tree
       zoxide
       fzf
-      ollama
       eza
-      zoxide
       fd
       delta
       tlrc
+      ## text editors etc
+      neovim
+      bat
+      kitty
+      zellij
     ];
 
   };
