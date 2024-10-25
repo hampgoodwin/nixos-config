@@ -12,16 +12,16 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration-latitude-7400.nix
+    ./hardware-configuration.nix
     # third-party non-core
     # local import
-    ./audio.nix
-    ./sh.nix
-    ./hamp.nix
-    ./hypr.nix
-    ./steam.nix
+    ../../modules/audio.nix
+    ../../modules/sh.nix
+    ../../modules/hamp.nix
+    ../../modules/hypr.nix
+    ../../modules/steam.nix
     # ./sunshine.nix
-    ./developer.nix
+    ../../modules/developer.nix
   ];
 
   # Bootloader.
@@ -34,13 +34,12 @@
   # latitude-7400 user from import
   user = {
     enable = true;
-    name = "latitude-7400";
+    name = "ideapad";
   };
   # Audio from import
   audio = {
     enable = true;
     bluetooth.enable = true;
-    bluetooth.powerOnBooth = true;
     packages.enable = true;
     lowLatency.enable = true;
     recordingSuite.enable = false;
@@ -78,7 +77,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ inputs.fh.overlays.default ];
   # Enable flakes and accompanying nix cli tools
   nix.settings.experimental-features = [
     "nix-command"
@@ -86,8 +84,8 @@
   ];
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    fh
     # keyboard
+    light
     # keymapp # doesn't work
     # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
