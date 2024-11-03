@@ -22,6 +22,7 @@
     ../../modules/steam.nix
     # ./sunshine.nix
     ../../modules/developer.nix
+    ../../modules/screencapture.nix
   ];
 
   # Bootloader.
@@ -102,7 +103,6 @@
     unzip
     wl-clipboard
     filezilla
-    grim
     swappy
     # communication
     slack
