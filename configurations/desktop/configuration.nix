@@ -15,14 +15,13 @@
     ./hardware-configuration.nix
     # third-party non-core
     # local import
-    ./audio.nix
-    ./sh.nix
-    ./hamp.nix
-    ./hypr.nix
-    # ./kde.nix
-    ./steam.nix
-    ./sunshine.nix
-    ./developer.nix
+    ../../modules/audio.nix
+    ../../modules/sh.nix
+    ../../modules/hamp.nix
+    ../../modules/hypr.nix
+    ../../modules/steam.nix
+    # ./sunshine.nix
+    ../../modules/developer.nix
   ];
 
   # Bootloader.
@@ -33,7 +32,10 @@
   # from import
   sh.enable = true;
   # hamp use from import
-  hamp.user.enable = true;
+  user = {
+    enable = true;
+    name = "hamp";
+  };
   # Audio from import
   audio = {
     enable = true;
@@ -80,7 +82,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ inputs.fh.overlays.default ];
   # Enable flakes and accompanying nix cli tools
   nix.settings.experimental-features = [
     "nix-command"
@@ -88,7 +89,6 @@
   ];
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    fh
     # keyboard
     # keymapp # doesn't work
     # zsa-udev-rules # doesn't work; add custom udev rules?
