@@ -46,6 +46,7 @@
     recordingSuite.enable = true;
   };
   developer.enable = true;
+  screencapture.enable = true;
 
   networking.hostName = "hamp"; # Define your hostname.
 
