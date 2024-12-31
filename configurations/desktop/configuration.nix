@@ -118,6 +118,9 @@
     libnotify
     # launcher
     rofi-wayland
+    # wine
+    wine
+    wineWowPackages.staging
   ];
 
   fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];

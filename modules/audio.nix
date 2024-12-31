@@ -72,8 +72,6 @@ with lib;
         wireplumber
         pavucontrol
         qpwgraph
-        spotify
-        spotify-qt
       ];
   };
 }
