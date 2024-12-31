@@ -19,8 +19,7 @@
 
     environment.systemPackages = with pkgs; [
       protonup
-      lutris
-      bottles
+      # bottles
       mangohud
     ];
   };
