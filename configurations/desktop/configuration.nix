@@ -6,6 +6,7 @@
   inputs,
   config,
   pkgs,
+  pkgs-stable,
   ...
 }:
 
@@ -82,6 +83,12 @@
     # };
   };
 
+  # configure stable and unstable packages
+  _module.args.pkgs-stable = import inputs.nixpkgs-stable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    inherit (config.nixpkgs) config;
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   # Enable flakes and accompanying nix cli tools
@@ -90,39 +97,39 @@
     "flakes"
   ];
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     # keyboard
     # keymapp # doesn't work
     # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
-    util-linux
-    killall
-    firefox
-    enpass
-    xfce.thunar
-    orca-slicer
-    unzip
-    wl-clipboard
-    filezilla
-    swappy
+    pkgs.util-linux
+    pkgs.killall
+    pkgs.firefox
+    pkgs.enpass
+    pkgs.xfce.thunar
+    pkgs-stable.orca-slicer
+    pkgs.unzip
+    pkgs.wl-clipboard
+    pkgs.filezilla
+    pkgs.swappy
     # communication
-    slack
-    vesktop
-    xwaylandvideobridge
+    pkgs.slack
+    pkgs.vesktop
+    pkgs.xwaylandvideobridge
     # bar
-    waybar
-    waybar-mpris
+    pkgs.waybar
+    pkgs.waybar-mpris
     # widgets
     # notifications
-    dunst
-    libnotify
+    pkgs.dunst
+    pkgs.libnotify
     # launcher
-    rofi-wayland
+    pkgs.rofi-wayland
     # wine
-    wine
-    wineWowPackages.staging
+    pkgs.wine
+    pkgs.wineWowPackages.staging
     # music
-    spotify
+    pkgs-stable.spotify
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];

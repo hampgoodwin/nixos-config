@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  pkgs-stable,
+  config,
+  ...
+}:
 {
   config = {
 
@@ -17,10 +22,10 @@
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/hamp/.steam/root/compatibilitytools.d";
     };
 
-    environment.systemPackages = with pkgs; [
-      protonup
-      # bottles
-      mangohud
+    environment.systemPackages = [
+      pkgs.protonup
+      pkgs-stable.bottles
+      pkgs.mangohud
     ];
   };
 }
