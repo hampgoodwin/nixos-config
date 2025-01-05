@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-stable,
   config,
   ...
 }:
@@ -40,6 +41,7 @@ with lib;
 
       # configure for bluetooth
       wireplumber = {
+        enable = true;
         extraConfig = {
           "monitor.bluez.properties" = {
             "bluez5.enable-sbc-xq" = true;
@@ -58,7 +60,7 @@ with lib;
       # configure extra low latency
       extraConfig.pipewire."92-low-latency" = mkIf config.audio.lowLatency.enable {
         context.properties = {
-          default.clock.rate = 48000;
+          default.clock.rate = 96000;
           default.clock.quantum = 32;
           default.clock.min-quantum = 32;
           default.clock.max-quantum = 32;
@@ -66,12 +68,17 @@ with lib;
       };
     };
 
-    environment.systemPackages =
-      with pkgs;
-      mkIf config.audio.packages.enable [
-        wireplumber
-        pavucontrol
-        qpwgraph
-      ];
+    environment.systemPackages = lib.concatLists [
+      (lib.optionals config.audio.enable [
+        pkgs-stable.wireplumber
+        pkgs-stable.pavucontrol
+        pkgs-stable.qpwgraph
+      ])
+
+      (lib.optionals (config.audio.enable && config.audio.recordingSuite.enable) [
+        pkgs.reaper
+        pkgs-stable.alsa-scarlett-gui
+      ])
+    ];
   };
 }

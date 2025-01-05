@@ -27,6 +27,7 @@
   ];
 
   # Bootloader.
+  boot.kernelPackages = pkgs-stable.linuxPackages_6_12;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -130,6 +131,7 @@
     pkgs.wineWowPackages.staging
     # music
     pkgs-stable.spotify
+    pkgs-stable.ytmdesktop
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
