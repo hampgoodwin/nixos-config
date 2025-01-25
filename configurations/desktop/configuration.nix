@@ -104,6 +104,7 @@
     # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
     pkgs.util-linux
+    pkgs.usbutils
     pkgs.killall
     pkgs.firefox
     pkgs.enpass
