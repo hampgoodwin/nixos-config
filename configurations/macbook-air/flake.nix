@@ -116,8 +116,11 @@
             fzf
 
             # applications
+            ## window manager
+            aerospace
             ## music
             spotify
+
             ## communications
             slack
             discord
