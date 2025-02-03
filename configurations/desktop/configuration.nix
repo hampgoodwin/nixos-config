@@ -84,6 +84,12 @@
     # };
   };
 
+  services.ollama = {
+    enable = true;
+    acceleration = "rocm";
+    loadModels = [ "deepseek-coder-v2:16b" ];
+  };
+
   # configure stable and unstable packages
   _module.args.pkgs-stable = import inputs.nixpkgs-stable {
     inherit (pkgs.stdenv.hostPlatform) system;
