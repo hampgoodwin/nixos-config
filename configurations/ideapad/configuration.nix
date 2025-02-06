@@ -6,6 +6,7 @@
   inputs,
   config,
   pkgs,
+  pkgs-stable,
   ...
 }:
 
@@ -25,6 +26,7 @@
   ];
 
   # Bootloader.
+  boot.kernelPackages = pkgs-stable.linuxPackages_6_12;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -75,6 +77,12 @@
     xkb.variant = "";
   };
 
+  # configure stable and unstable packages
+  _module.args.pkgs-stable = import inputs.nixpkgs-stable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    inherit (config.nixpkgs) config;
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   # Enable flakes and accompanying nix cli tools
@@ -83,39 +91,40 @@
     "flakes"
   ];
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     # keyboard
-    light
+    pkgs.light
     # keymapp # doesn't work
     # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
-    util-linux
-    killall
-    firefox
-    enpass
-    xfce.thunar
-    orca-slicer
-    unzip
-    wl-clipboard
-    filezilla
-    grim
-    swappy
+    pkgs.util-linux
+    pkgs.usbutils
+    pkgs.killall
+    pkgs.firefox
+    pkgs.enpass
+    pkgs.xfce.thunar
+    pkgs-stable.orca-slicer
+    pkgs.unzip
+    pkgs.wl-clipboard
+    pkgs.filezilla
+    pkgs.grim
+    pkgs.swappy
     # communication
-    slack
-    vesktop
-    xwaylandvideobridge
+    pkgs.slack
+    pkgs.vesktop
+    pkgs.xwaylandvideobridge
     # bar
-    waybar
-    waybar-mpris
+    pkgs.waybar
+    pkgs.waybar-mpris
     # widgets
     # notifications
-    dunst
-    libnotify
+    pkgs.dunst
+    pkgs.libnotify
     # launcher
-    rofi-wayland
+    pkgs.rofi-wayland
   ];
 
-  fonts.packages = with pkgs; [ nerd-fonts.jet-brains-mono ];
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

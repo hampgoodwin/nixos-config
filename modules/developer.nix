@@ -26,7 +26,7 @@ with lib;
       rust-analyzer
       ## node / js
       nodejs_22
-      nodePackages.typescript-language-server
+      typescript-language-server
       eslint_d
       ## nix
       nil
@@ -38,7 +38,7 @@ with lib;
       stylua
       ## bash
       shellcheck
-      nodePackages.bash-language-server
+      bash-language-server
 
       # tools
       ## build
