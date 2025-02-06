@@ -26,6 +26,7 @@ with lib;
       rust-analyzer
       ## node / js
       nodejs_22
+      typescript
       typescript-language-server
       eslint_d
       ## nix
