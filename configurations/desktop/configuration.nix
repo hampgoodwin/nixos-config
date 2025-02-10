@@ -51,6 +51,7 @@
   screencapture.enable = true;
 
   networking.hostName = "hamp"; # Define your hostname.
+  networking.firewall.enable = true;
 
   # Enable wireless networking/lan via network manager
   networking.networkmanager.enable = true;
