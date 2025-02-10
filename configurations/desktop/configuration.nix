@@ -84,10 +84,15 @@
     # };
   };
 
-  services.ollama = {
-    enable = true;
-    acceleration = "rocm";
-    loadModels = [ "deepseek-coder-v2:16b" ];
+  services = {
+    ollama = {
+      enable = true;
+      host = "0.0.0.0";
+      openFirewall = true;
+      acceleration = "rocm";
+      loadModels = [ "deepseek-coder-v2:16b" ];
+      rocmOverrideGfx = "11.0.0";
+    };
   };
 
   # configure stable and unstable packages
