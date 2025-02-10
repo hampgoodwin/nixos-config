@@ -132,7 +132,7 @@
             casks = [
               "enpass"
               "firefox"
-              "notion"
+              # "notion" # I don't really love notion anymore; let's give obsidian a try?
               "obsidian"
             ];
             # # in order for mas apps to install, ensure you're logged into
