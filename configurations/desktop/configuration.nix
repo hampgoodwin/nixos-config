@@ -51,7 +51,17 @@
   screencapture.enable = true;
 
   networking.hostName = "hamp"; # Define your hostname.
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+    # 3c:a6:f6:35:45:c8 macbook-air
+    # 8c:1d:96:95:1a:be desktop
+    extraCommands = ''
+      iptables -A INPUT -i lo -p tcp --dport 11434 -j ACCEPT
+      iptables -A INPUT -m mac --mac-source 3c:a6:f6:35:45:c8 -p tcp --dport 11434 -j ACCEPT
+      iptables -A INPUT -m mac --mac-source 8c:1d:96:95:1a:be -p tcp --dport 11434 -j ACCEPT
+      iptables -A INPUT -p tcp --dport 11434 -j REJECT
+    '';
+  };
 
   # Enable wireless networking/lan via network manager
   networking.networkmanager.enable = true;
@@ -91,7 +101,6 @@
       host = "0.0.0.0";
       openFirewall = true;
       acceleration = "rocm";
-      loadModels = [ "deepseek-coder-v2:16b" ];
       rocmOverrideGfx = "11.0.0";
     };
   };
@@ -126,6 +135,8 @@
     pkgs.wl-clipboard
     pkgs.filezilla
     pkgs.swappy
+    ## network
+    pkgs.nettools
     # communication
     pkgs.slack
     pkgs.vesktop
