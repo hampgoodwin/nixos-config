@@ -133,6 +133,7 @@
               "enpass"
               "firefox"
               "notion"
+              "obsidian"
             ];
             # # in order for mas apps to install, ensure you're logged into
             # # the [m]ac [a]pp [s]tore and have purchased the app.
