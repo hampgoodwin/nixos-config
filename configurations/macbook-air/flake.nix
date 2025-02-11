@@ -117,7 +117,6 @@
 
             # applications
             ## efficiency
-            shortcat # cmd+shift+space
             ## window manager
             aerospace
             jankyborders # use to highlight active windows more clearly
