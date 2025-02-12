@@ -55,12 +55,12 @@
     enable = true;
     # 3c:a6:f6:35:45:c8 macbook-air
     # 8c:1d:96:95:1a:be desktop
-    extraCommands = ''
-      iptables -A INPUT -i lo -p tcp --dport 11434 -j ACCEPT
-      iptables -A INPUT -m mac --mac-source 3c:a6:f6:35:45:c8 -p tcp --dport 11434 -j ACCEPT
-      iptables -A INPUT -m mac --mac-source 8c:1d:96:95:1a:be -p tcp --dport 11434 -j ACCEPT
-      iptables -A INPUT -p tcp --dport 11434 -j REJECT
-    '';
+    # extraCommands = ''
+    #   iptables -A INPUT -i lo -p tcp --dport 11434 -j ACCEPT
+    #   iptables -A INPUT -m mac --mac-source 3c:a6:f6:35:45:c8 -p tcp --dport 11434 -j ACCEPT
+    #   iptables -A INPUT -m mac --mac-source 8c:1d:96:95:1a:be -p tcp --dport 11434 -j ACCEPT
+    #   iptables -A INPUT -p tcp --dport 11434 -j REJECT
+    # '';
   };
 
   # Enable wireless networking/lan via network manager
@@ -135,6 +135,7 @@
     pkgs.wl-clipboard
     pkgs.filezilla
     pkgs.swappy
+    pkgs-stable.nixos-facter
     ## network
     pkgs.nettools
     # communication
