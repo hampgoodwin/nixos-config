@@ -51,17 +51,6 @@
   screencapture.enable = true;
 
   networking.hostName = "hamp"; # Define your hostname.
-  networking.firewall = {
-    enable = true;
-    # 3c:a6:f6:35:45:c8 macbook-air
-    # 8c:1d:96:95:1a:be desktop
-    # extraCommands = ''
-    #   iptables -A INPUT -i lo -p tcp --dport 11434 -j ACCEPT
-    #   iptables -A INPUT -m mac --mac-source 3c:a6:f6:35:45:c8 -p tcp --dport 11434 -j ACCEPT
-    #   iptables -A INPUT -m mac --mac-source 8c:1d:96:95:1a:be -p tcp --dport 11434 -j ACCEPT
-    #   iptables -A INPUT -p tcp --dport 11434 -j REJECT
-    # '';
-  };
 
   # Enable wireless networking/lan via network manager
   networking.networkmanager.enable = true;
@@ -102,6 +91,19 @@
       openFirewall = true;
       acceleration = "rocm";
       rocmOverrideGfx = "11.0.0";
+      environmentVariables = {
+        OLLAMA_KEEP_ALIVE = "30m";
+      };
+    };
+    open-webui = {
+      enable = true;
+      host = "0.0.0.0";
+      openFirewall = true;
+      port = 8081;
+      environment = {
+        OLLAMA_API_BASE_URL = "http://hamp:11434";
+        WEBUI_AUTH = "False";
+      };
     };
   };
 

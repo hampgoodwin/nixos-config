@@ -22,7 +22,8 @@ with lib;
       gofumpt
       delve
       ## rust
-      rustup
+      cargo
+      rustc
       rust-analyzer
       ## node / js
       nodejs_22
