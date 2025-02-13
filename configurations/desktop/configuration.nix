@@ -138,12 +138,12 @@
     pkgs.filezilla
     pkgs.swappy
     pkgs-stable.nixos-facter
-    ## network
+    ## security
     pkgs.nettools
     # communication
     pkgs.slack
     pkgs.vesktop
-    pkgs.xwaylandvideobridge
+    pkgs.discord-canary
     pkgs.obsidian
     # bar
     pkgs.waybar
@@ -154,9 +154,6 @@
     pkgs.libnotify
     # launcher
     pkgs.rofi-wayland
-    # wine
-    pkgs.wine
-    pkgs.wineWowPackages.staging
     # music
     pkgs-stable.spotify
     pkgs-stable.ytmdesktop

@@ -43,10 +43,13 @@ with lib;
       bash-language-server
 
       # tools
+      ## security
+      # openssl
       ## build
       libgcc
       clang
       gnumake
+      # pkg-config
       ## command line
       ripgrep
       git

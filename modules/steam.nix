@@ -23,9 +23,13 @@
     };
 
     environment.systemPackages = [
+      # wine
+      # pkgs.wine
+      # pkgs.wineWowPackages.staging
+      # deps
       pkgs.protonup
+      # wine manager
       pkgs-stable.bottles
-      pkgs.mangohud
     ];
   };
 }
