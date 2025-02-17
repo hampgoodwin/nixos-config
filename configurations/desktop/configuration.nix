@@ -92,7 +92,7 @@
       acceleration = "rocm";
       rocmOverrideGfx = "11.0.0";
       environmentVariables = {
-        OLLAMA_KEEP_ALIVE = "30m";
+        OLLAMA_KEEP_ALIVE = "5m";
       };
     };
     open-webui = {
