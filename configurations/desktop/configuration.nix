@@ -155,8 +155,9 @@
     # launcher
     pkgs.rofi-wayland
     # music
-    pkgs-stable.spotify
-    pkgs-stable.ytmdesktop
+    pkgs.spotify
+    # video
+    pkgs.obs-studio
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];

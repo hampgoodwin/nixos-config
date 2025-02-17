@@ -43,6 +43,8 @@ with lib;
       bash-language-server
 
       # tools
+      ## file transfer tools
+      wget
       ## security
       # openssl
       ## build
