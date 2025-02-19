@@ -140,7 +140,7 @@
             # # in order for mas apps to install, ensure you're logged into
             # # the [m]ac [a]pp [s]tore and have purchased the app.
             masApps = {
-              "Magnet" = 441258766;
+              "ZSA Keymapp" = 6472865291;
             };
             onActivation = {
               cleanup = "uninstall";
