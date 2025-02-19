@@ -142,7 +142,6 @@
     pkgs.nettools
     # communication
     pkgs.slack
-    pkgs.vesktop
     pkgs.discord-canary
     pkgs.obsidian
     # bar

@@ -111,7 +111,6 @@
     pkgs.swappy
     # communication
     pkgs.slack
-    pkgs.vesktop
     pkgs.xwaylandvideobridge
     pkgs.obsidian
     # bar
