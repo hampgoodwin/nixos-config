@@ -1,10 +1,8 @@
 {
-  description = "macbook-air configuration";
+  description = "ghost configuration";
   inputs = {
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # # third party
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
@@ -30,7 +28,6 @@
       self,
       nixpkgs,
       nix-darwin,
-      home-manager,
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
@@ -48,6 +45,6 @@
     {
       modules = [ ];
 
-      darwinPackages = self.darwinConfigurations.macbook-air.pkgs;
+      darwinPackages = self.darwinConfigurations.ghost.pkgs;
     };
 }

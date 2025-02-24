@@ -6,8 +6,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # # third party
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
@@ -33,7 +31,6 @@
       self,
       nixpkgs,
       nix-darwin,
-      home-manager,
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
@@ -124,7 +121,7 @@
             spotify
 
             ## communications
-            slack
+            # slack # managed by rippling
             discord
           ];
 
@@ -134,14 +131,14 @@
             casks = [
               "enpass"
               "firefox"
-              # "notion" # I don't really love notion anymore; let's give obsidian a try?
               "obsidian"
+              "notion" # company uses notion
+              "focusrite-control-2"
+              "linear-linear"
             ];
-            # # in order for mas apps to install, ensure you're logged into
-            # # the [m]ac [a]pp [s]tore and have purchased the app.
-            masApps = {
-              "ZSA Keymapp" = 6472865291;
-            };
+            # in order for mas apps to install, ensure you're logged into
+            # the [m]ac [a]pp [s]tore and have purchased the app.
+            #masApps = {};
             onActivation = {
               cleanup = "uninstall";
               autoUpdate = true;
@@ -179,10 +176,9 @@
             postUserActivation.text = "defaultbrowser firefox";
           };
 
-          # Auto upgrade nix package and the daemon service.
-          services.nix-daemon.enable = true;
-          # nix.package = pkgs.nix;
-
+          # nix-darwin requires this because determinate and nix-darwin have conflicting
+          # managers.
+          nix.enable = false;
           # Necessary for using flakes on this system.
           nix.settings.experimental-features = "nix-command flakes";
 
@@ -207,34 +203,11 @@
     in
     {
       # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#Hamps-MacBook-Air
-      darwinConfigurations."Hamps-MacBook-Air" = nix-darwin.lib.darwinSystem {
+      # $ darwin-rebuild build --flake .#ghost
+      darwinConfigurations."ghost" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
           mac-app-util.darwinModules.default
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            # manager hampgoodwin user
-            home-manager.users.hampgoodwin = {
-              imports = [
-                # ./hampgoodwin-home.nix; # move configuration here
-                mac-app-util.homeManagerModules.default
-              ];
-              home = {
-                username = "hampgoodwin";
-                # homeDirectory = "/Users/hampgoodwin";
-
-                stateVersion = "24.05";
-              };
-
-              programs.home-manager.enable = true;
-            };
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
