@@ -113,6 +113,8 @@
     pkgs.slack
     pkgs.xwaylandvideobridge
     pkgs.obsidian
+    # audio
+    pkgs.spotify
     # bar
     pkgs.waybar
     pkgs.waybar-mpris
