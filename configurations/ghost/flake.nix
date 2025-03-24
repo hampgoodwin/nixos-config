@@ -73,7 +73,15 @@
             bat
             neovim
 
+            ## datastores
+            postgresql_17
+
             ## programming languages
+            ### infra
+            tenv # opentofu, terraform, terrafrunt ,and atmos version manager
+            terraform-ls # terraform language server
+            ### vscode language servers
+            vscode-langservers-extracted
             ### go
             go_1_23
             gofumpt
@@ -86,9 +94,11 @@
             bash-language-server
 
             ### node
-            nodejs_22
-            nodePackages.typescript-language-server
+            typescript
+            typescript-language-server
             eslint_d
+            prettierd
+            vscode-js-debug
 
             ### lua
             lua
@@ -102,6 +112,8 @@
 
             ## tools
             fd
+            gawk
+            gnupg
             eza
             delta
             tlrc
@@ -111,6 +123,11 @@
             ripgrep
             jq
             fzf
+            postman
+            magic-wormhole
+            imagemagick
+            lazygit
+            graphviz # for madge to make graphs of deps
 
             # applications
             ## efficiency
@@ -122,19 +139,27 @@
 
             ## communications
             # slack # managed by rippling
-            discord
+            # discord
           ];
 
           # homebrew declarations
           homebrew = {
             enable = true;
+            brews = [
+              "asdf"
+            ];
             casks = [
               "enpass"
               "firefox"
               "obsidian"
               "notion" # company uses notion
-              "focusrite-control-2"
+              # "focusrite-control-2"
               "linear-linear"
+              "figma"
+              "1password"
+              "1password-cli"
+              "beekeeper-studio"
+              "keymapp"
             ];
             # in order for mas apps to install, ensure you're logged into
             # the [m]ac [a]pp [s]tore and have purchased the app.
@@ -166,6 +191,7 @@
             };
             loginwindow.GuestEnabled = false;
             NSGlobalDomain.AppleICUForce24HourTime = false;
+            NSGlobalDomain._HIHideMenuBar = true;
           };
           # unfortunately, there's no module because uninstalling rosetta 2
           # is a challenge. https://github.com/LnL7/nix-darwin/issues/786
