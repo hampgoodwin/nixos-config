@@ -23,6 +23,7 @@
     ../../modules/steam.nix
     # ./sunshine.nix
     ../../modules/developer.nix
+    ../../modules/screencapture.nix
   ];
 
   # Bootloader.
@@ -47,6 +48,7 @@
     recordingSuite.enable = false;
   };
   developer.enable = true;
+  screencapture.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
 
