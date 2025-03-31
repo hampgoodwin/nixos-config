@@ -122,6 +122,7 @@
             git
             ripgrep
             jq
+            jd-diff-patch
             fzf
             postman
             magic-wormhole
@@ -147,6 +148,7 @@
             enable = true;
             brews = [
               "asdf"
+              "grep"
             ];
             casks = [
               "enpass"
