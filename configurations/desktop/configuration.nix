@@ -126,6 +126,7 @@
     # keymapp # doesn't work
     # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
+    pkgs.vlc
     pkgs.util-linux
     pkgs.usbutils
     pkgs.killall
@@ -142,7 +143,7 @@
     pkgs.nettools
     # communication
     pkgs.slack
-    pkgs.discord-canary
+    pkgs-stable.discord
     pkgs.obsidian
     # bar
     pkgs.waybar
@@ -157,6 +158,8 @@
     pkgs.spotify
     # video
     pkgs.obs-studio
+    # image
+    pkgs.gimp-with-plugins
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
