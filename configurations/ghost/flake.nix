@@ -177,6 +177,7 @@
           fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
           # system settings
+          system.primaryUser = "hampgoodwin";
           system.defaults = {
             dock = {
               autohide = true;
@@ -200,9 +201,9 @@
           system.activationScripts.extraActivation.text = ''
             softwareupdate --install-rosetta --agree-to-license
           '';
-          system.activationScripts = {
-            postUserActivation.text = "defaultbrowser firefox";
-          };
+          # system.activationScripts = {
+          #   postUserActivation.text = "defaultbrowser firefox";
+          # };
 
           # nix-darwin requires this because determinate and nix-darwin have conflicting
           # managers.
