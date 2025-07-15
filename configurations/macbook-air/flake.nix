@@ -114,6 +114,8 @@
             ripgrep
             jq
             fzf
+            docker_28
+            colima
 
             # applications
             ## efficiency
@@ -153,6 +155,7 @@
           fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
           # system settings
+          system.primaryUser = "hampgoodwin";
           system.defaults = {
             dock = {
               autohide = true;
@@ -175,13 +178,11 @@
           system.activationScripts.extraActivation.text = ''
             softwareupdate --install-rosetta --agree-to-license
           '';
-          system.activationScripts = {
-            postUserActivation.text = "defaultbrowser firefox";
-          };
 
           # Auto upgrade nix package and the daemon service.
-          services.nix-daemon.enable = true;
+          # services.nix-daemon.enable = true;
           # nix.package = pkgs.nix;
+          nix.enable = true;
 
           # Necessary for using flakes on this system.
           nix.settings.experimental-features = "nix-command flakes";
