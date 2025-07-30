@@ -78,7 +78,7 @@
 
             ## programming languages
             ### go
-            go_1_23
+            go_1_24
             gofumpt
             golangci-lint
             gopls
