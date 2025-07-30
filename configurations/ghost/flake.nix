@@ -60,6 +60,9 @@
             # osx alias mk tool for nix
             mkalias
 
+            # network tools
+            wget
+
             # darwin tools
             defaultbrowser
 
