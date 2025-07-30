@@ -129,6 +129,7 @@
             imagemagick
             lazygit
             graphviz # for madge to make graphs of deps
+            natscli
 
             # applications
             ## efficiency
