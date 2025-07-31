@@ -98,6 +98,7 @@
 
             ### node
             typescript
+            # vtsls
             typescript-language-server
             eslint_d
             prettierd
