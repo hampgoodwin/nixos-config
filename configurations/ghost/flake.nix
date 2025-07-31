@@ -100,6 +100,7 @@
             typescript
             # vtsls
             typescript-language-server
+            # typescript-go
             eslint_d
             prettierd
             vscode-js-debug
