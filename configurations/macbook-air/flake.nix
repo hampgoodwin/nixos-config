@@ -104,6 +104,7 @@
             nil
 
             ## tools
+            buf
             fd
             eza
             delta
