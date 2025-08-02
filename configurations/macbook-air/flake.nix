@@ -90,7 +90,7 @@
 
             ### node
             nodejs_22
-            nodePackages.typescript-language-server
+            typescript-language-server
             eslint_d
 
             ### lua
