@@ -101,7 +101,7 @@
             ### nix
             nix
             nixfmt-rfc-style
-            nil
+            nixd
 
             ## tools
             buf
