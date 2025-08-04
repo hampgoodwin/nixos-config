@@ -153,7 +153,6 @@
           homebrew = {
             enable = true;
             brews = [
-              "asdf"
               "grep"
             ];
             casks = [
