@@ -60,6 +60,14 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
+            # global user space
+            git
+            nix-direnv
+            openssh
+            fzf
+            ripgrep
+            jq
+
             # osx alias mk tool for nix
             mkalias
 
@@ -75,18 +83,6 @@
             vim
             bat
             neovim
-
-            ## programming languages
-            ### go
-            go_1_24
-            gofumpt
-            golangci-lint
-            gopls
-            delve
-
-            ### bash
-            shellcheck
-            bash-language-server
 
             ### node
             nodejs_22
@@ -104,19 +100,11 @@
             nixd
 
             ## tools
-            buf
             fd
             eza
             delta
             tlrc
             zoxide
-            openssh
-            git
-            ripgrep
-            jq
-            fzf
-            docker_28
-            colima
 
             # applications
             ## efficiency
@@ -127,6 +115,8 @@
             spotify
 
             ## communications
+            firefox-unwrapped
+            enpass-mac
             slack
             discord
           ];
@@ -135,16 +125,9 @@
           homebrew = {
             enable = true;
             casks = [
-              "enpass"
-              "firefox"
               # "notion" # I don't really love notion anymore; let's give obsidian a try?
               "obsidian"
             ];
-            # # in order for mas apps to install, ensure you're logged into
-            # # the [m]ac [a]pp [s]tore and have purchased the app.
-            masApps = {
-              "ZSA Keymapp" = 6472865291;
-            };
             onActivation = {
               cleanup = "uninstall";
               autoUpdate = true;
@@ -162,8 +145,8 @@
               autohide = true;
               persistent-apps = [
                 "${pkgs.kitty}/Applications/Kitty.app"
-                "/Applications/Firefox.app"
-                "/Applications/Enpass.app"
+                "${pkgs.firefox-unwrapped}/Applications/Firefox.app"
+                "${pkgs.enpass-mac}/Applications/Enpass.app"
               ];
             };
             finder = {
