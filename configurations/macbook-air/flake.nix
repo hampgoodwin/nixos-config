@@ -3,10 +3,12 @@
 
   inputs = {
     # standard packages
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin";
+    # Use `github:NixOS/nixpkgs/nixpkgs-25.05-darwin` to use Nixpkgs 25.05.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+    # Use `github:nix-darwin/nix-darwin/nix-darwin-25.05` to use Nixpkgs 25.05.
+    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # # third party
@@ -24,8 +26,6 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
-
-    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   outputs =
@@ -34,11 +34,6 @@
       nixpkgs,
       nix-darwin,
       home-manager,
-      nix-homebrew,
-      homebrew-core,
-      homebrew-cask,
-      homebrew-bundle,
-      mac-app-util,
       ...
     }:
     let
@@ -62,7 +57,6 @@
           environment.systemPackages = with pkgs; [
             # global user space
             git
-            nix-direnv
             openssh
             fzf
             ripgrep
@@ -121,20 +115,6 @@
             discord
           ];
 
-          # homebrew declarations
-          homebrew = {
-            enable = true;
-            casks = [
-              # "notion" # I don't really love notion anymore; let's give obsidian a try?
-              "obsidian"
-            ];
-            onActivation = {
-              cleanup = "uninstall";
-              autoUpdate = true;
-              upgrade = true;
-            };
-          };
-
           # fonts
           fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
@@ -164,8 +144,6 @@
           '';
 
           # Auto upgrade nix package and the daemon service.
-          # services.nix-daemon.enable = true;
-          # nix.package = pkgs.nix;
           nix.enable = true;
 
           # Necessary for using flakes on this system.
@@ -176,6 +154,15 @@
               enable = true; # default shell on catalina
               enableFzfGit = true;
               enableFzfHistory = true;
+            };
+            direnv = {
+              enable = true;
+              silent = false;
+              loadInNixShell = true;
+              # enableZshIntegration = true;
+              nix-direnv = {
+                enable = true;
+              };
             };
           };
 
@@ -196,7 +183,6 @@
       darwinConfigurations."Hamps-MacBook-Air" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
-          mac-app-util.darwinModules.default
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -204,14 +190,12 @@
             # manager hampgoodwin user
             home-manager.users.hampgoodwin = {
               imports = [
-                # ./hampgoodwin-home.nix; # move configuration here
-                mac-app-util.homeManagerModules.default
               ];
               home = {
                 username = "hampgoodwin";
                 # homeDirectory = "/Users/hampgoodwin";
 
-                stateVersion = "24.05";
+                stateVersion = "25.05";
               };
 
               programs.home-manager.enable = true;
@@ -219,31 +203,6 @@
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
-          }
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              # Install Homebrew under the default prefix
-              enable = true;
-
-              # Apple Silicon Only: Also install homebrew under the default Intel prefix for Rosetta 2
-              enableRosetta = true; # default true
-
-              # User owning the homebrew prefix
-              user = "hampgoodwin";
-
-              # Optional: Declarative tap management
-              taps = {
-                "homebrew/homebrew-core" = homebrew-core;
-                "homebrew/homebrew-cask" = homebrew-cask;
-                "homebrew/homebrew-bundle" = homebrew-bundle;
-              };
-
-              # Optional: Enable fully-declarative tap management
-              #
-              # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
-              mutableTaps = false;
-            };
           }
         ];
       };
