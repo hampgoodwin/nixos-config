@@ -195,7 +195,7 @@
                 username = "hampgoodwin";
                 # homeDirectory = "/Users/hampgoodwin";
 
-                stateVersion = "25.05";
+                stateVersion = "24.05";
               };
 
               programs.home-manager.enable = true;
