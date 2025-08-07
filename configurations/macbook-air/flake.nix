@@ -155,15 +155,6 @@
               enableFzfGit = true;
               enableFzfHistory = true;
             };
-            direnv = {
-              enable = true;
-              silent = false;
-              loadInNixShell = true;
-              # enableZshIntegration = true;
-              nix-direnv = {
-                enable = true;
-              };
-            };
           };
 
           # Set Git commit hash for darwin-version.
@@ -199,15 +190,22 @@
               };
 
               programs.home-manager.enable = true;
+              programs.direnv = {
+                enable = true;
+                silent = false;
+                # loadInNixShell = true;
+                enableZshIntegration = true;
+                nix-direnv = {
+                  enable = true;
+                };
+              };
             };
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
           }
         ];
+        specialArgs = { inherit inputs; };
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."Hamps-MacBook-Air".pkgs;
+      # darwinPackages = self.darwinConfigurations."Hamps-MacBook-Air".pkgs;
     };
 }
