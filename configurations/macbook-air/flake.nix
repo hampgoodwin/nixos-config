@@ -155,6 +155,17 @@
               enableFzfGit = true;
               enableFzfHistory = true;
             };
+            direnv = {
+              enable = true;
+              package = pkgs.direnv;
+              silent = false;
+              loadInNixShell = true;
+              # enableZshIntegration = true;
+              nix-direnv = {
+                enable = true;
+                package = pkgs.nix-direnv;
+              };
+            };
           };
 
           # Set Git commit hash for darwin-version.
@@ -174,33 +185,6 @@
       darwinConfigurations."Hamps-MacBook-Air" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            # manager hampgoodwin user
-            home-manager.users.hampgoodwin = {
-              imports = [
-              ];
-              home = {
-                username = "hampgoodwin";
-                # homeDirectory = "/Users/hampgoodwin";
-
-                stateVersion = "24.05";
-              };
-
-              programs.home-manager.enable = true;
-              programs.direnv = {
-                enable = true;
-                silent = false;
-                # loadInNixShell = true;
-                enableZshIntegration = true;
-                nix-direnv = {
-                  enable = true;
-                };
-              };
-            };
-          }
         ];
         specialArgs = { inherit inputs; };
       };
