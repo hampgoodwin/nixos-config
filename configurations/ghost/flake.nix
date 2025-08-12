@@ -4,24 +4,8 @@
   inputs = {
     # standard packages
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
-    # # third party
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    # Optional: Declarative tap management
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
 
     mac-app-util.url = "github:hraban/mac-app-util";
   };
@@ -29,12 +13,8 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
       nix-darwin,
-      nix-homebrew,
-      homebrew-core,
-      homebrew-cask,
-      homebrew-bundle,
+      nixpkgs,
       mac-app-util,
       ...
     }:
@@ -57,14 +37,8 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
-            # osx alias mk tool for nix
-            mkalias
-
             # network tools
             wget
-
-            # darwin tools
-            defaultbrowser
 
             # developer toolings
             ## terminal emulator
@@ -135,6 +109,8 @@
             lazygit
             graphviz # for madge to make graphs of deps
             natscli
+            direnv
+            nix-direnv
 
             # applications
             ## efficiency
@@ -148,35 +124,6 @@
             # slack # managed by rippling
             # discord
           ];
-
-          # homebrew declarations
-          homebrew = {
-            enable = true;
-            brews = [
-              "grep"
-            ];
-            casks = [
-              "enpass"
-              "firefox"
-              "obsidian"
-              "notion" # company uses notion
-              # "focusrite-control-2"
-              "linear-linear"
-              "figma"
-              "1password"
-              "1password-cli"
-              "beekeeper-studio"
-              "keymapp"
-            ];
-            # in order for mas apps to install, ensure you're logged into
-            # the [m]ac [a]pp [s]tore and have purchased the app.
-            #masApps = {};
-            onActivation = {
-              cleanup = "uninstall";
-              autoUpdate = true;
-              upgrade = true;
-            };
-          };
 
           # fonts
           fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
@@ -206,9 +153,6 @@
           system.activationScripts.extraActivation.text = ''
             softwareupdate --install-rosetta --agree-to-license
           '';
-          # system.activationScripts = {
-          #   postUserActivation.text = "defaultbrowser firefox";
-          # };
 
           # nix-darwin requires this because determinate and nix-darwin have conflicting
           # managers.
@@ -242,35 +186,10 @@
         modules = [
           configuration
           mac-app-util.darwinModules.default
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              # Install Homebrew under the default prefix
-              enable = true;
-
-              # Apple Silicon Only: Also install homebrew under the default Intel prefix for Rosetta 2
-              enableRosetta = true; # default true
-
-              # User owning the homebrew prefix
-              user = "hampgoodwin";
-
-              # Optional: Declarative tap management
-              taps = {
-                "homebrew/homebrew-core" = homebrew-core;
-                "homebrew/homebrew-cask" = homebrew-cask;
-                "homebrew/homebrew-bundle" = homebrew-bundle;
-              };
-
-              # Optional: Enable fully-declarative tap management
-              #
-              # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
-              mutableTaps = false;
-            };
-          }
         ];
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."Hamps-MacBook-Air".pkgs;
+      darwinPackages = self.darwinConfigurations."ghost".pkgs;
     };
 }
