@@ -85,7 +85,6 @@
             lua-language-server
             stylua
             ### nix
-            nix
             nixfmt-rfc-style
             nil
 
