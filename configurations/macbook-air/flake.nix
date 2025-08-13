@@ -74,6 +74,8 @@
             # applications
             firefox
             spotify
+            slack
+            discord
             ## security
             #wireguard # install gui in mac via appstore
             #enpass # install gui in mac via appstore
