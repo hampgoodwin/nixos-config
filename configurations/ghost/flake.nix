@@ -108,8 +108,6 @@
             lazygit
             graphviz # for madge to make graphs of deps
             natscli
-            direnv
-            nix-direnv
 
             # applications
             ## efficiency
@@ -164,6 +162,17 @@
               enable = true; # default shell on catalina
               enableFzfGit = true;
               enableFzfHistory = true;
+            };
+            direnv = {
+              enable = true;
+              package = pkgs.direnv;
+              silent = false;
+              loadInNixShell = true;
+              # enableZshIntegration = true;
+              nix-direnv = {
+                enable = true;
+                package = pkgs.nix-direnv;
+              };
             };
           };
 
