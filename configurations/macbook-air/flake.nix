@@ -8,24 +8,8 @@
     # Use `github:nix-darwin/nix-darwin/nix-darwin-25.05` to use Nixpkgs 25.05.
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # # third party
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    # Optional: Declarative tap management
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   outputs =
@@ -33,7 +17,7 @@
       self,
       nixpkgs,
       nix-darwin,
-      home-manager,
+      mac-app-util,
       ...
     }:
     let
@@ -89,7 +73,6 @@
             lua-language-server
             stylua
             ### nix
-            nix
             nixfmt-rfc-style
             nixd
 
@@ -101,18 +84,12 @@
             zoxide
 
             # applications
+            firefox
+            spotify
             ## efficiency
             ## window manager
             aerospace
             jankyborders # use to highlight active windows more clearly
-            ## music
-            spotify
-
-            ## communications
-            firefox-unwrapped
-            enpass-mac
-            slack
-            discord
           ];
 
           # fonts
@@ -123,11 +100,7 @@
           system.defaults = {
             dock = {
               autohide = true;
-              persistent-apps = [
-                "${pkgs.kitty}/Applications/Kitty.app"
-                "${pkgs.firefox-unwrapped}/Applications/Firefox.app"
-                "${pkgs.enpass-mac}/Applications/Enpass.app"
-              ];
+              persistent-apps = [ ];
             };
             finder = {
               AppleShowAllExtensions = true;
@@ -143,11 +116,8 @@
             softwareupdate --install-rosetta --agree-to-license
           '';
 
-          # Auto upgrade nix package and the daemon service.
-          nix.enable = true;
-
-          # Necessary for using flakes on this system.
-          nix.settings.experimental-features = "nix-command flakes";
+          # i use determinate nix which manages nix
+          nix.enable = false;
 
           programs = {
             zsh = {
@@ -185,11 +155,12 @@
       darwinConfigurations."Hamps-MacBook-Air" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
+          mac-app-util.darwinModules.default
         ];
         specialArgs = { inherit inputs; };
       };
 
       # Expose the package set, including overlays, for convenience.
-      # darwinPackages = self.darwinConfigurations."Hamps-MacBook-Air".pkgs;
+      darwinPackages = self.darwinConfigurations."Hamps-MacBook-Air".pkgs;
     };
 }
