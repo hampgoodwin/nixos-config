@@ -15,14 +15,13 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
       nix-darwin,
       mac-app-util,
       ...
     }:
     let
       configuration =
-        { pkgs, config, ... }:
+        { pkgs, ... }:
         {
           # users
           users.users = {
@@ -46,12 +45,6 @@
             ripgrep
             jq
 
-            # osx alias mk tool for nix
-            mkalias
-
-            # darwin tools
-            defaultbrowser
-
             # developer toolings
             ## terminal emulator
             kitty
@@ -61,11 +54,6 @@
             vim
             bat
             neovim
-
-            ### node
-            nodejs_22
-            typescript-language-server
-            eslint_d
 
             ### lua
             lua
@@ -86,6 +74,9 @@
             # applications
             firefox
             spotify
+            ## security
+            #wireguard # install gui in mac via appstore
+            #enpass # install gui in mac via appstore
             ## efficiency
             ## window manager
             aerospace
