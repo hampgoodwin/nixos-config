@@ -3,8 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  inputs,
-  config,
   pkgs,
   pkgs-stable,
   ...
@@ -77,11 +75,6 @@
   services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";
-
-    # displayManager.sddm = {
-    #   enable = true;
-    #   wayland.enable = true;
-    # };
   };
 
   services = {
@@ -107,25 +100,23 @@
     };
   };
 
-  # configure stable and unstable packages
-  _module.args.pkgs-stable = import inputs.nixpkgs-stable {
-    inherit (pkgs.stdenv.hostPlatform) system;
-    inherit (config.nixpkgs) config;
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
   # Enable flakes and accompanying nix cli tools
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
   # List packages installed in system profile. To search, run:
   environment.systemPackages = [
     # keyboard
     # keymapp # doesn't work
     # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
+    pkgs.cachix
     pkgs.vlc
     pkgs.util-linux
     pkgs.usbutils
@@ -133,7 +124,7 @@
     pkgs.firefox
     pkgs.enpass
     pkgs.xfce.thunar
-    pkgs-stable.orca-slicer
+    pkgs.orca-slicer
     pkgs.unzip
     pkgs.wl-clipboard
     pkgs.filezilla
@@ -143,7 +134,7 @@
     pkgs.nettools
     # communication
     pkgs.slack
-    pkgs-stable.discord
+    pkgs.vesktop
     pkgs.obsidian
     # bar
     pkgs.waybar
@@ -159,7 +150,7 @@
     # video
     pkgs.obs-studio
     # image
-    pkgs.gimp-with-plugins
+    pkgs-stable.gimp-with-plugins
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];

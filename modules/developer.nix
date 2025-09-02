@@ -16,20 +16,20 @@ with lib;
     environment.systemPackages = with pkgs; [
       # programming
       ## go
-      go
-      gopls
-      golangci-lint
-      gofumpt
-      delve
+      # go
+      # gopls
+      # golangci-lint
+      # gofumpt
+      # delve
       ## rust
-      cargo
-      rustc
-      rust-analyzer
+      # cargo
+      # rustc
+      # rust-analyzer
       ## node / js
-      nodejs_22
-      typescript
-      typescript-language-server
-      eslint_d
+      # nodejs_22
+      # typescript
+      # typescript-language-server
+      # eslint_d
       ## nix
       nil
       nixfmt-rfc-style
@@ -48,9 +48,9 @@ with lib;
       ## security
       # openssl
       ## build
-      libgcc
-      clang
-      gnumake
+      # libgcc
+      # clang
+      # gnumake
       # pkg-config
       ## command line
       ripgrep
@@ -63,11 +63,15 @@ with lib;
       delta
       tlrc
       ## text editors etc
-      neovim
       bat
       kitty
       zellij
     ];
+
+    programs.neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
 
   };
 }

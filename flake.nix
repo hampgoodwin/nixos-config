@@ -7,18 +7,36 @@
   };
 
   outputs =
-    inputs: with inputs; {
+    {
+      self,
+      nixpkgs,
+      nixpkgs-stable,
+      cachix,
+      ...
+    }@inputs:
+    let
+      linux = "x86_64-linux";
+      pkgs-stable = import inputs.nixpkgs-stable {
+        system = linux;
+        config.allowUnfree = true;
+      };
+    in
+    {
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = linux;
         specialArgs = {
           inherit inputs;
+          inherit pkgs-stable;
         };
-        modules = [ ./configurations/desktop/configuration.nix ];
+        modules = [
+          ./configurations/desktop/configuration.nix
+        ];
       };
       nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = linux;
         specialArgs = {
           inherit inputs;
+          inherit pkgs-stable;
         };
         modules = [ ./configurations/ideapad/configuration.nix ];
       };

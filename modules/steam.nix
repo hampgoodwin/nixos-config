@@ -1,12 +1,11 @@
 {
+  inputs,
   pkgs,
   pkgs-stable,
-  config,
   ...
 }:
 {
   config = {
-
     hardware = {
       graphics.enable = true;
     };
@@ -23,9 +22,6 @@
     };
 
     environment.systemPackages = [
-      # wine
-      # pkgs.wine
-      # pkgs.wineWowPackages.staging
       # deps
       pkgs.protonup
       # wine manager
