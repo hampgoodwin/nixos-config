@@ -158,6 +158,12 @@
   #   enableSSHSupport = true;
   # };
 
+  # virtualization gui manager
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = [ "hamp" ];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
