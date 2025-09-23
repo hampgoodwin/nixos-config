@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   outputs =
@@ -11,11 +16,14 @@
       self,
       nixpkgs,
       nixpkgs-stable,
+      nix-darwin,
+      mac-app-util,
       cachix,
       ...
     }@inputs:
     let
       linux = "x86_64-linux";
+      darwin = "aarch64-darwin";
       pkgs-stable = import inputs.nixpkgs-stable {
         system = linux;
         config.allowUnfree = true;
@@ -40,5 +48,18 @@
         };
         modules = [ ./configurations/ideapad/configuration.nix ];
       };
+      darwinConfigurations.mbp = nix-darwin.lib.darwinSystem {
+        system = darwin;
+        modules = [
+          ./configurations/mbp/configuration.nix
+          mac-app-util.darwinModules.default
+        ];
+        specialArgs = {
+          inherit inputs;
+          inherit pkgs-stable;
+        };
+      };
+
+      darwinPackages = self.darwinConfigurations.mbp.pkgs;
     };
 }

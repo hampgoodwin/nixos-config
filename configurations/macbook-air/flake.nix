@@ -3,10 +3,8 @@
 
   inputs = {
     # standard packages
-    # Use `github:NixOS/nixpkgs/nixpkgs-25.05-darwin` to use Nixpkgs 25.05.
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
-    # Use `github:nix-darwin/nix-darwin/nix-darwin-25.05` to use Nixpkgs 25.05.
-    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     mac-app-util.url = "github:hraban/mac-app-util";
@@ -48,7 +46,6 @@
             # developer toolings
             ## terminal emulator
             kitty
-            ghostty
             zellij
 
             ## text editors
@@ -147,7 +144,9 @@
           configuration
           mac-app-util.darwinModules.default
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+        };
       };
 
       # Expose the package set, including overlays, for convenience.
