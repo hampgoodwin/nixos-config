@@ -48,6 +48,7 @@
             # developer toolings
             ## terminal emulator
             kitty
+            ghostty
             zellij
 
             ## text editors
@@ -66,9 +67,6 @@
 
             ## tools
             fd
-            eza
-            delta
-            tlrc
             zoxide
 
             # applications
