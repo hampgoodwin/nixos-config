@@ -50,7 +50,7 @@
     zoxide
 
     # applications
-    firefox
+    # firefox
     spotify
     slack
     ## security
