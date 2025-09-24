@@ -3,11 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
+    nix-darwin-pkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
+    nix-darwin.inputs.nixpkgs.follows = "nix-darwin-pkgs";
     mac-app-util.url = "github:hraban/mac-app-util";
   };
 
@@ -56,7 +56,7 @@
         ];
         specialArgs = {
           inherit inputs;
-          inherit pkgs-stable;
+          inherit self;
         };
       };
 

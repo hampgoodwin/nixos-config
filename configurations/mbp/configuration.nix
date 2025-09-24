@@ -1,16 +1,15 @@
 {
   self,
   pkgs,
-  pkgs-stable,
   ...
 }:
 {
   # users
   users.users = {
-    hampgoodwin = {
+    hamp = {
       shell = pkgs.zsh;
       description = "Hamp Goodwin";
-      home = "/Users/hampgoodwin";
+      home = "/Users/hamp";
     };
   };
 
@@ -22,7 +21,6 @@
   environment.systemPackages = with pkgs; [
     # global user space
     git
-    openssh
     fzf
     ripgrep
     jq
@@ -68,7 +66,7 @@
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   # system settings
-  system.primaryUser = "hampgoodwin";
+  system.primaryUser = "hamp";
   system.defaults = {
     dock = {
       autohide = true;
@@ -110,7 +108,7 @@
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 5;
+  system.stateVersion = 6;
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
