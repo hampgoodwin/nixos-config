@@ -164,6 +164,11 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.

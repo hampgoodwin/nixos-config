@@ -66,6 +66,9 @@ with lib;
       bat
       kitty
       zellij
+      gnumake
+      docker
+      colima
     ];
 
     programs.neovim = {
