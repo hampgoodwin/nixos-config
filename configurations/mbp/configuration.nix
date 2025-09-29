@@ -24,6 +24,7 @@
     fzf
     ripgrep
     jq
+    tree
 
     # developer toolings
     ## terminal emulator
@@ -35,6 +36,7 @@
     vim
     bat
     neovim
+    obsidian
 
     ### lua
     lua
@@ -53,6 +55,7 @@
     # firefox
     spotify
     slack
+    zoom-us
     ## security
     #wireguard # install gui in mac via appstore
     #enpass # install gui in mac via appstore
