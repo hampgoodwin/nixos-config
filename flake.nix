@@ -18,7 +18,6 @@
       nixpkgs-stable,
       nix-darwin,
       mac-app-util,
-      cachix,
       ...
     }@inputs:
     let
@@ -56,6 +55,7 @@
         ];
         specialArgs = {
           inherit inputs;
+          inherit pkgs-stable;
           inherit self;
         };
       };
