@@ -74,7 +74,7 @@ with lib;
         pkgs-stable.wireplumber
         pkgs-stable.pavucontrol
         pkgs-stable.qpwgraph
-        pkgs.sonusmix
+        pkgs-stable.sonusmix
       ])
 
       (lib.optionals (config.audio.enable && config.audio.recordingSuite.enable) [

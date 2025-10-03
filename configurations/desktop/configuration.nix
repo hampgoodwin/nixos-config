@@ -140,7 +140,7 @@
     pkgs.dunst
     pkgs.libnotify
     # launcher
-    pkgs.rofi-wayland
+    pkgs.rofi
     # music
     pkgs.spotify
     # video

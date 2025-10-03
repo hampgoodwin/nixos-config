@@ -123,7 +123,7 @@
     pkgs.dunst
     pkgs.libnotify
     # launcher
-    pkgs.rofi-wayland
+    pkgs.rofi
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
