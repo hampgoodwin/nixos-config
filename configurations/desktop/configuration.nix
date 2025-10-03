@@ -166,7 +166,14 @@
 
   programs.direnv = {
     enable = true;
-    nix-direnv.enable = true;
+    package = pkgs.direnv;
+    silent = false;
+    loadInNixShell = true;
+    # enableZshIntegration = true;
+    nix-direnv = {
+      enable = true;
+      package = pkgs.nix-direnv;
+    };
   };
 
   # List services that you want to enable:
