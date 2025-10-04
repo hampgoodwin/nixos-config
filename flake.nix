@@ -27,6 +27,10 @@
         system = linux;
         config.allowUnfree = true;
       };
+      pkgs-stable-darwin = import inputs.nixpkgs-stable {
+        system = darwin;
+        config.allowUnfree = true;
+      };
     in
     {
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
@@ -55,7 +59,7 @@
         ];
         specialArgs = {
           inherit inputs;
-          inherit pkgs-stable;
+          inherit pkgs-stable-darwin;
           inherit self;
         };
       };

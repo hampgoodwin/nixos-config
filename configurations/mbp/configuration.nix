@@ -1,7 +1,7 @@
 {
   self,
   pkgs,
-  pkgs-stable,
+  pkgs-stable-darwin,
   ...
 }:
 {
@@ -29,7 +29,7 @@
 
     # developer toolings
     ## terminal emulator
-    pkgs-stable.kitty
+    pkgs-stable-darwin.kitty
     # ghostty # busted on aarch64-darwin ;(
     zellij
 
