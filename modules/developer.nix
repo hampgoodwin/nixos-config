@@ -48,9 +48,9 @@ with lib;
       ## security
       # openssl
       ## build
-      # libgcc
-      # clang
-      # gnumake
+      libgcc
+      clang
+      gnumake
       # pkg-config
       ## command line
       ripgrep
