@@ -54,7 +54,7 @@
 
     # applications
     # firefox
-    spotify
+    vesktop
     slack
     zoom-us
     ## security
