@@ -9,6 +9,7 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nix-darwin-pkgs";
     mac-app-util.url = "github:hraban/mac-app-util";
+    nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
   };
 
   outputs =
@@ -40,6 +41,8 @@
           inherit pkgs-stable;
         };
         modules = [
+          inputs.nixos-facter-modules.nixosModules.facter
+          { config.facter.reportPath = ./configurations/desktop/facter.json; }
           ./configurations/desktop/configuration.nix
         ];
       };

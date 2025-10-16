@@ -11,7 +11,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    # ./hardware-configuration.nix # using nixos-facter
     # third-party non-core
     # local import
     ../../modules/audio.nix
@@ -123,7 +123,7 @@
     pkgs.unzip
     pkgs.wl-clipboard
     pkgs.swappy
-    pkgs-stable.nixos-facter
+    pkgs.nixos-facter
     ## security
     pkgs.enpass
     pkgs.nettools
