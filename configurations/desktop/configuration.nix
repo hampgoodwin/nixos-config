@@ -28,6 +28,22 @@
   boot.kernelPackages = pkgs-stable.linuxPackages_6_12;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
+  ## filesystems generated at start; prefer disko next time!
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/5e27d6c5-103b-48c2-9b08-9b6d7d61913e";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/479E-CC2E";
+    fsType = "vfat";
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/8244c73d-f20c-4ae3-8fe6-eeebc3d51c5f"; }
+  ];
 
   # Shell, uses zsh
   # from import
@@ -69,12 +85,6 @@
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-    xkb.layout = "us";
-    xkb.variant = "";
   };
 
   services = {

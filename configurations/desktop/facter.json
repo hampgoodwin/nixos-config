@@ -1296,6 +1296,7 @@
       {
         "architecture": "x86_64",
         "vendor_name": "GenuineIntel",
+        "model_name": "13th Gen Intel(R) Core(TM) i9-13900K",
         "family": 6,
         "model": 183,
         "stepping": 1,
@@ -1450,17 +1451,20 @@
           "bhi",
           "vmscape"
         ],
+        "power_management": [
+          ""
+        ],
         "bogo": 5990,
         "cache": 36864,
         "units": 128,
+        "page_size": 4096,
         "physical_id": 0,
         "siblings": 32,
         "cores": 24,
-        "fpu": true,
-        "fpu_exception": true,
+        "fpu": false,
+        "fpu_exception": false,
         "cpuid_level": 32,
         "write_protect": false,
-        "tlb_size": 32767,
         "clflush_size": 64,
         "cache_alignment": 64,
         "address_sizes": {
