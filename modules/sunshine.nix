@@ -7,7 +7,6 @@
 
 {
   config = {
-
     services.sunshine = {
       enable = true;
       settings = {

@@ -23,7 +23,7 @@
 
     environment.systemPackages = [
       # deps
-      pkgs.protonup
+      pkgs.protonup-ng
       # wine manager
       pkgs.lutris
       pkgs.protonplus

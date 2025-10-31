@@ -19,7 +19,7 @@
     ../../modules/hamp.nix
     ../../modules/hypr.nix
     ../../modules/steam.nix
-    # ./sunshine.nix
+    # ../../modules/sunshine.nix
     ../../modules/developer.nix
     ../../modules/screencapture.nix
   ];
@@ -29,6 +29,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
+
+  # Addtl Hardware configuration
+  hardware.amdgpu.overdrive.enable = true;
 
   ## filesystems generated at start; prefer disko next time!
   fileSystems."/" = {
@@ -88,6 +91,23 @@
   };
 
   services = {
+    # Enable the OpenSSH daemon.
+    openssh.enable = true;
+    # lact is for AMD GPU overclocking/gui
+    lact = {
+      enable = true;
+      settings = {
+        version = 5;
+        daemon = {
+          log_level = "info";
+          admin_group = "wheel";
+          disable_clocks_cleanup = false;
+        };
+        apply_settings_timer = 5;
+        current_profile = null;
+        auto_switch_profiles = false;
+      };
+    };
     ollama = {
       enable = true;
       host = "0.0.0.0";
@@ -187,9 +207,6 @@
   };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
