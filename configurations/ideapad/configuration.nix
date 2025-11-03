@@ -31,9 +31,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Virtualization
-  virtualisation.docker.enable = true;
-
   # Shell, uses zsh
   # from import
   sh.enable = true;
