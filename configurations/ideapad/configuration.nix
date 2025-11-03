@@ -31,6 +31,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Virtualization
+  virtualisation.docker.enable = true;
+
   # Shell, uses zsh
   # from import
   sh.enable = true;
@@ -113,8 +116,9 @@
     pkgs.swappy
     # communication
     pkgs.slack
-    pkgs.xwaylandvideobridge
+    pkgs.kdePackages.xwaylandvideobridge
     pkgs.obsidian
+    pkgs-stable.discord-ptb
     # audio
     pkgs.spotify
     # bar
