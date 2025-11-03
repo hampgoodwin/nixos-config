@@ -108,26 +108,6 @@
         auto_switch_profiles = false;
       };
     };
-    ollama = {
-      enable = true;
-      host = "0.0.0.0";
-      openFirewall = true;
-      acceleration = "rocm";
-      rocmOverrideGfx = "11.0.0";
-      environmentVariables = {
-        OLLAMA_KEEP_ALIVE = "5m";
-      };
-    };
-    open-webui = {
-      enable = true;
-      host = "0.0.0.0";
-      openFirewall = true;
-      port = 8081;
-      environment = {
-        OLLAMA_API_BASE_URL = "http://hamp:11434";
-        WEBUI_AUTH = "False";
-      };
-    };
   };
 
   # Allow unfree packages
