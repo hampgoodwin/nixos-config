@@ -58,28 +58,28 @@ with lib;
       };
 
       # configure extra low latency
-      extraConfig.pipewire."48-low-latency" = mkIf config.audio.lowLatency.enable {
+      extraConfig.pipewire."92-low-latency" = mkIf config.audio.lowLatency.enable {
         context.properties = {
           default.clock.rate = 48000;
-          default.clock.quantum = 256;
-          default.clock.min-quantum = 128;
-          default.clock.max-quantum = 1024;
+          default.clock.quantum = 32;
+          default.clock.min-quantum = 32;
+          default.clock.max-quantum = 32;
         };
       };
     };
 
     environment.systemPackages = lib.concatLists [
       (lib.optionals config.audio.enable [
-        pkgs-stable.pulseaudio
-        pkgs-stable.wireplumber
-        pkgs-stable.pavucontrol
-        pkgs-stable.qpwgraph
-        pkgs-stable.sonusmix
+        pkgs.pulseaudio
+        pkgs.wireplumber
+        pkgs.pavucontrol
+        pkgs.qpwgraph
+        # pkgs.sonusmix # rmv due to lack of maint
       ])
 
       (lib.optionals (config.audio.enable && config.audio.recordingSuite.enable) [
         pkgs.reaper
-        pkgs-stable.alsa-scarlett-gui
+        pkgs.alsa-scarlett-gui
       ])
     ];
   };

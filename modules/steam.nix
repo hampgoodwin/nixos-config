@@ -27,7 +27,7 @@
       # wine manager
       pkgs.lutris
       pkgs.protonplus
-      pkgs-stable.bottles
+      pkgs.bottles
     ];
   };
 }

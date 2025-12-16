@@ -23,8 +23,8 @@
     },
     "bluetooth": [
       {
-        "index": 82,
-        "attached_to": 99,
+        "index": 84,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "bluetooth"
@@ -102,8 +102,8 @@
         "module_alias": "usb:v8087p0032d0000dcE0dsc01dp01icE0isc01ip01in00"
       },
       {
-        "index": 100,
-        "attached_to": 99,
+        "index": 104,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "bluetooth"
@@ -1016,8 +1016,8 @@
     ],
     "camera": [
       {
-        "index": 85,
-        "attached_to": 104,
+        "index": 88,
+        "attached_to": 108,
         "class_list": [
           "camera",
           "usb"
@@ -1108,8 +1108,8 @@
         "module_alias": "usb:v046Dp085Ed0317dcEFdsc02dp01ic0Eisc02ip00in02"
       },
       {
-        "index": 88,
-        "attached_to": 104,
+        "index": 91,
+        "attached_to": 108,
         "class_list": [
           "camera",
           "usb"
@@ -1200,8 +1200,8 @@
         "module_alias": "usb:v046Dp085Ed0317dcEFdsc02dp01ic0Eisc01ip00in00"
       },
       {
-        "index": 109,
-        "attached_to": 104,
+        "index": 113,
+        "attached_to": 108,
         "class_list": [
           "camera",
           "usb"
@@ -1465,6 +1465,7 @@
         "fpu_exception": false,
         "cpuid_level": 32,
         "write_protect": false,
+        "tlb_size": 32766,
         "clflush_size": 64,
         "cache_alignment": 64,
         "address_sizes": {
@@ -1557,6 +1558,97 @@
       },
       {
         "index": 69,
+        "attached_to": 63,
+        "class_list": [
+          "disk",
+          "usb",
+          "scsi",
+          "block_device"
+        ],
+        "bus_type": {
+          "hex": "0084",
+          "name": "SCSI",
+          "value": 132
+        },
+        "slot": {
+          "bus": 9,
+          "number": 0
+        },
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "vendor": {
+          "hex": "04e8",
+          "name": "Samsung",
+          "value": 1256
+        },
+        "device": {
+          "hex": "4001",
+          "name": "PSSD T7",
+          "value": 16385
+        },
+        "revision": {
+          "hex": "0000",
+          "name": "0",
+          "value": 0
+        },
+        "serial": "F035209N0JNCT5S",
+        "model": "Samsung PSSD T7",
+        "sysfs_id": "/class/block/sdb",
+        "sysfs_bus_id": "9:0:0:0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:14.0/usb1/1-3/1-3:1.0/host9/target9:0:0/9:0:0:0",
+        "unix_device_names": [
+          "/dev/disk/by-id/usb-Samsung_PSSD_T7_S5TCNJ0N902530F-0:0",
+          "/dev/disk/by-path/pci-0000:00:14.0-usb-0:3:1.0-scsi-0:0:0:0",
+          "/dev/disk/by-path/pci-0000:00:14.0-usbv2-0:3:1.0-scsi-0:0:0:0",
+          "/dev/sdb"
+        ],
+        "unix_device_name2": "/dev/sg0",
+        "resources": [
+          {
+            "type": "baud",
+            "speed": 480000000,
+            "bits": 0,
+            "stop_bits": 0,
+            "parity": 0,
+            "handshake": 0
+          },
+          {
+            "type": "disk_geo",
+            "cylinders": 243201,
+            "heads": 255,
+            "sectors": 63,
+            "size": "0x0",
+            "geo_type": "logical"
+          },
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 3907029168,
+            "value_2": 512
+          }
+        ],
+        "driver": "uas",
+        "driver_module": "uas",
+        "drivers": [
+          "sd",
+          "uas"
+        ],
+        "driver_modules": [
+          "sd_mod",
+          "uas"
+        ],
+        "module_alias": "usb:v04E8p4001d0100dc00dsc00dp00ic08isc06ip62in00"
+      },
+      {
+        "index": 70,
         "attached_to": 47,
         "class_list": [
           "disk",
@@ -1635,6 +1727,89 @@
         "driver_modules": [
           "nvme"
         ]
+      },
+      {
+        "index": 71,
+        "attached_to": 63,
+        "class_list": [
+          "disk",
+          "usb",
+          "scsi",
+          "block_device"
+        ],
+        "bus_type": {
+          "hex": "0084",
+          "name": "SCSI",
+          "value": 132
+        },
+        "slot": {
+          "bus": 8,
+          "number": 0
+        },
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "vendor": {
+          "hex": "13fe",
+          "name": "UFD 3.0",
+          "value": 5118
+        },
+        "device": {
+          "hex": "5500",
+          "name": "Silicon-Power128",
+          "value": 21760
+        },
+        "revision": {
+          "hex": "0000",
+          "name": "PMAP",
+          "value": 0
+        },
+        "serial": "P71B7B023F40",
+        "model": "UFD 3.0 Silicon-Power128",
+        "sysfs_id": "/class/block/sda",
+        "sysfs_bus_id": "8:0:0:0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1.2/2-1.2:1.0/host8/target8:0:0/8:0:0:0",
+        "unix_device_names": [
+          "/dev/disk/by-id/usb-UFD_3.0_Silicon-Power128_P1703422070A7BB2F0587945-0:0",
+          "/dev/disk/by-path/pci-0000:00:14.0-usb-0:1.2:1.0-scsi-0:0:0:0",
+          "/dev/disk/by-path/pci-0000:00:14.0-usbv3-0:1.2:1.0-scsi-0:0:0:0",
+          "/dev/sda"
+        ],
+        "unix_device_name2": "/dev/sg1",
+        "resources": [
+          {
+            "type": "disk_geo",
+            "cylinders": 15053,
+            "heads": 255,
+            "sectors": 63,
+            "size": "0x0",
+            "geo_type": "logical"
+          },
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 241827840,
+            "value_2": 512
+          }
+        ],
+        "driver": "usb-storage",
+        "driver_module": "usb_storage",
+        "drivers": [
+          "sd",
+          "usb-storage"
+        ],
+        "driver_modules": [
+          "sd_mod",
+          "usb_storage"
+        ],
+        "module_alias": "usb:v13FEp5500d0100dc00dsc00dp00ic08isc06ip50in00"
       }
     ],
     "graphics_card": [
@@ -1722,8 +1897,8 @@
     ],
     "hub": [
       {
-        "index": 70,
-        "attached_to": 115,
+        "index": 72,
+        "attached_to": 119,
         "class_list": [
           "usb",
           "hub"
@@ -1798,8 +1973,8 @@
         "module_alias": "usb:v174Cp3074d0001dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 73,
-        "attached_to": 74,
+        "index": 75,
+        "attached_to": 76,
         "class_list": [
           "usb",
           "hub"
@@ -1874,8 +2049,8 @@
         "module_alias": "usb:v0BDAp0411d0001dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 74,
-        "attached_to": 104,
+        "index": 76,
+        "attached_to": 108,
         "class_list": [
           "usb",
           "hub"
@@ -1950,8 +2125,8 @@
         "module_alias": "usb:v0BDAp0411d0001dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 78,
-        "attached_to": 99,
+        "index": 80,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "hub"
@@ -2035,8 +2210,8 @@
         "module_alias": "usb:v05E3p0608d6090dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 79,
-        "attached_to": 99,
+        "index": 81,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "hub"
@@ -2121,8 +2296,8 @@
         "module_alias": "usb:v0BDAp5420d0163dc09dsc00dp02ic09isc00ip02in00"
       },
       {
-        "index": 80,
-        "attached_to": 115,
+        "index": 82,
+        "attached_to": 119,
         "class_list": [
           "usb",
           "hub"
@@ -2197,8 +2372,8 @@
         "module_alias": "usb:v174Cp3074d0001dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 84,
-        "attached_to": 110,
+        "index": 87,
+        "attached_to": 114,
         "class_list": [
           "usb",
           "hub"
@@ -2283,8 +2458,8 @@
         "module_alias": "usb:v0BDAp5411d0001dc09dsc00dp02ic09isc00ip02in00"
       },
       {
-        "index": 91,
-        "attached_to": 115,
+        "index": 95,
+        "attached_to": 119,
         "class_list": [
           "usb",
           "hub"
@@ -2359,7 +2534,7 @@
         "module_alias": "usb:v0BDAp0420d0163dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 99,
+        "index": 103,
         "attached_to": 63,
         "class_list": [
           "usb",
@@ -2381,7 +2556,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.12.49 xhci-hcd",
+          "name": "Linux 6.12.62 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -2395,7 +2570,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.12.49 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.12.62 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-0:1.0",
         "sysfs_bus_id": "1-0:1.0",
         "resources": [
@@ -2446,8 +2621,8 @@
         "module_alias": "usb:v1D6Bp0002d0612dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 103,
-        "attached_to": 99,
+        "index": 107,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "hub"
@@ -2532,8 +2707,8 @@
         "module_alias": "usb:v05E3p0610d0663dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 104,
-        "attached_to": 115,
+        "index": 108,
+        "attached_to": 119,
         "class_list": [
           "usb",
           "hub"
@@ -2608,8 +2783,8 @@
         "module_alias": "usb:v05E3p0626d0663dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 110,
-        "attached_to": 103,
+        "index": 114,
+        "attached_to": 107,
         "class_list": [
           "usb",
           "hub"
@@ -2694,8 +2869,8 @@
         "module_alias": "usb:v0BDAp5411d0001dc09dsc00dp02ic09isc00ip02in00"
       },
       {
-        "index": 114,
-        "attached_to": 99,
+        "index": 118,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "hub"
@@ -2780,7 +2955,7 @@
         "module_alias": "usb:v174Cp2074d0001dc09dsc00dp02ic09isc00ip02in00"
       },
       {
-        "index": 115,
+        "index": 119,
         "attached_to": 63,
         "class_list": [
           "usb",
@@ -2802,7 +2977,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.12.49 xhci-hcd",
+          "name": "Linux 6.12.62 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -2816,7 +2991,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.12.49 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.12.62 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb2/2-0:1.0",
         "sysfs_bus_id": "2-0:1.0",
         "detail": {
@@ -2857,8 +3032,8 @@
         "module_alias": "usb:v1D6Bp0003d0612dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 117,
-        "attached_to": 99,
+        "index": 121,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "hub"
@@ -2945,8 +3120,8 @@
     ],
     "keyboard": [
       {
-        "index": 77,
-        "attached_to": 84,
+        "index": 79,
+        "attached_to": 87,
         "class_list": [
           "keyboard",
           "usb"
@@ -3047,8 +3222,8 @@
         "module_alias": "usb:v1038p1618d0401dc00dsc00dp00ic03isc01ip01in00"
       },
       {
-        "index": 87,
-        "attached_to": 84,
+        "index": 90,
+        "attached_to": 87,
         "class_list": [
           "keyboard",
           "usb"
@@ -3150,8 +3325,8 @@
         "module_alias": "usb:v3842p2415dA149dc00dsc00dp00ic03isc01ip01in01"
       },
       {
-        "index": 93,
-        "attached_to": 110,
+        "index": 97,
+        "attached_to": 114,
         "class_list": [
           "keyboard",
           "usb"
@@ -3253,8 +3428,8 @@
         "module_alias": "usb:v3297p1977d0001dc00dsc00dp00ic03isc01ip01in00"
       },
       {
-        "index": 108,
-        "attached_to": 84,
+        "index": 112,
+        "attached_to": 87,
         "class_list": [
           "keyboard",
           "usb"
@@ -3549,12 +3724,12 @@
           "manufacture_year": 2020,
           "manufacture_week": 52,
           "vertical_sync": {
-            "min": 60,
-            "max": 120
+            "min": 50,
+            "max": 75
           },
           "horizontal_sync": {
-            "min": 183,
-            "max": 183
+            "min": 30,
+            "max": 90
           },
           "horizontal_sync_timings": {
             "disp": 3840,
@@ -3566,9 +3741,9 @@
             "disp": 1080,
             "sync_start": 1083,
             "sync_end": 1093,
-            "total": 1144
+            "total": 1111
           },
-          "clock": 549000,
+          "clock": 266500,
           "width": 3840,
           "height": 1080,
           "width_millimetres": 1193,
@@ -3583,12 +3758,12 @@
           "width": 3840,
           "height": 1080,
           "vertical_sync": {
-            "min": 60,
-            "max": 120
+            "min": 50,
+            "max": 75
           },
           "horizontal_sync": {
-            "min": 183,
-            "max": 183
+            "min": 30,
+            "max": 90
           },
           "bandwidth": 0,
           "horizontal_sync_timings": {
@@ -3601,7 +3776,7 @@
             "disp": 1080,
             "sync_start": 1083,
             "sync_end": 1093,
-            "total": 1144
+            "total": 1111
           },
           "horizontal_flag": 45,
           "vertical_flag": 43
@@ -3610,8 +3785,8 @@
     ],
     "mouse": [
       {
-        "index": 94,
-        "attached_to": 84,
+        "index": 98,
+        "attached_to": 87,
         "class_list": [
           "mouse",
           "usb"
@@ -3718,8 +3893,8 @@
         "module_alias": "usb:v1038p1618d0401dc00dsc00dp00ic03isc00ip00in03"
       },
       {
-        "index": 106,
-        "attached_to": 110,
+        "index": 110,
+        "attached_to": 114,
         "class_list": [
           "mouse",
           "usb"
@@ -3826,8 +4001,8 @@
         "module_alias": "usb:v056Ep010Cd0110dc00dsc00dp00ic03isc01ip02in00"
       },
       {
-        "index": 113,
-        "attached_to": 84,
+        "index": 117,
+        "attached_to": 87,
         "class_list": [
           "mouse",
           "usb"
@@ -4186,7 +4361,7 @@
     ],
     "network_interface": [
       {
-        "index": 121,
+        "index": 125,
         "attached_to": 49,
         "class_list": [
           "network_interface"
@@ -4227,7 +4402,7 @@
         ]
       },
       {
-        "index": 122,
+        "index": 126,
         "attached_to": 43,
         "class_list": [
           "network_interface"
@@ -4268,7 +4443,7 @@
         ]
       },
       {
-        "index": 123,
+        "index": 127,
         "attached_to": 0,
         "class_list": [
           "network_interface"
@@ -4958,8 +5133,8 @@
         "label": "Intel HD Audio"
       },
       {
-        "index": 71,
-        "attached_to": 99,
+        "index": 73,
+        "attached_to": 103,
         "class_list": [
           "sound",
           "usb"
@@ -5064,8 +5239,8 @@
         "module_alias": "usb:v0B05p1A52d0003dcEFdsc02dp01ic01isc02ip20in03"
       },
       {
-        "index": 76,
-        "attached_to": 99,
+        "index": 78,
+        "attached_to": 103,
         "class_list": [
           "sound",
           "usb"
@@ -5170,8 +5345,8 @@
         "module_alias": "usb:v0B05p1A52d0003dcEFdsc02dp01ic01isc02ip20in01"
       },
       {
-        "index": 81,
-        "attached_to": 104,
+        "index": 83,
+        "attached_to": 108,
         "class_list": [
           "sound",
           "usb"
@@ -5267,8 +5442,8 @@
         "module_alias": "usb:v046Dp085Ed0317dcEFdsc02dp01ic01isc02ip00in04"
       },
       {
-        "index": 83,
-        "attached_to": 103,
+        "index": 86,
+        "attached_to": 107,
         "class_list": [
           "sound",
           "usb"
@@ -5374,8 +5549,8 @@
         "module_alias": "usb:v1235p821Ad0967dcEFdsc02dp01ic01isc02ip20in02"
       },
       {
-        "index": 86,
-        "attached_to": 103,
+        "index": 89,
+        "attached_to": 107,
         "class_list": [
           "sound",
           "usb"
@@ -5481,8 +5656,8 @@
         "module_alias": "usb:v1235p821Ad0967dcEFdsc02dp01ic01isc01ip20in00"
       },
       {
-        "index": 89,
-        "attached_to": 99,
+        "index": 92,
+        "attached_to": 103,
         "class_list": [
           "sound",
           "usb"
@@ -5587,8 +5762,8 @@
         "module_alias": "usb:v0B05p1A52d0003dcEFdsc02dp01ic01isc02ip20in06"
       },
       {
-        "index": 92,
-        "attached_to": 99,
+        "index": 96,
+        "attached_to": 103,
         "class_list": [
           "sound",
           "usb"
@@ -5693,8 +5868,8 @@
         "module_alias": "usb:v0B05p1A52d0003dcEFdsc02dp01ic01isc02ip20in04"
       },
       {
-        "index": 96,
-        "attached_to": 99,
+        "index": 100,
+        "attached_to": 103,
         "class_list": [
           "sound",
           "usb"
@@ -5799,8 +5974,8 @@
         "module_alias": "usb:v0B05p1A52d0003dcEFdsc02dp01ic01isc02ip20in02"
       },
       {
-        "index": 102,
-        "attached_to": 99,
+        "index": 106,
+        "attached_to": 103,
         "class_list": [
           "sound",
           "usb"
@@ -5905,8 +6080,8 @@
         "module_alias": "usb:v0B05p1A52d0003dcEFdsc02dp01ic01isc01ip20in00"
       },
       {
-        "index": 105,
-        "attached_to": 104,
+        "index": 109,
+        "attached_to": 108,
         "class_list": [
           "sound",
           "usb"
@@ -6002,8 +6177,8 @@
         "module_alias": "usb:v046Dp085Ed0317dcEFdsc02dp01ic01isc01ip00in03"
       },
       {
-        "index": 107,
-        "attached_to": 103,
+        "index": 111,
+        "attached_to": 107,
         "class_list": [
           "sound",
           "usb"
@@ -6109,8 +6284,8 @@
         "module_alias": "usb:v1235p821Ad0967dcEFdsc02dp01ic01isc02ip20in01"
       },
       {
-        "index": 118,
-        "attached_to": 99,
+        "index": 122,
+        "attached_to": 103,
         "class_list": [
           "sound",
           "usb"
@@ -6556,8 +6731,8 @@
     ],
     "usb": [
       {
-        "index": 72,
-        "attached_to": 84,
+        "index": 74,
+        "attached_to": 87,
         "class_list": [
           "usb",
           "unknown"
@@ -6653,8 +6828,8 @@
         "module_alias": "usb:v1038p1618d0401dc00dsc00dp00ic03isc00ip00in02"
       },
       {
-        "index": 75,
-        "attached_to": 103,
+        "index": 77,
+        "attached_to": 107,
         "class_list": [
           "usb",
           "unknown"
@@ -6745,8 +6920,8 @@
         "module_alias": "usb:v1235p821Ad0967dcEFdsc02dp01ic01isc01ip00in04"
       },
       {
-        "index": 90,
-        "attached_to": 110,
+        "index": 93,
+        "attached_to": 114,
         "class_list": [
           "usb",
           "unknown"
@@ -6843,8 +7018,8 @@
         "module_alias": "usb:v3297p1977d0001dc00dsc00dp00ic03isc00ip00in02"
       },
       {
-        "index": 95,
-        "attached_to": 103,
+        "index": 99,
+        "attached_to": 107,
         "class_list": [
           "usb",
           "unknown"
@@ -6935,8 +7110,8 @@
         "module_alias": "usb:v1235p821Ad0967dcEFdsc02dp01ic01isc03ip00in05"
       },
       {
-        "index": 97,
-        "attached_to": 84,
+        "index": 101,
+        "attached_to": 87,
         "class_list": [
           "usb",
           "unknown"
@@ -7026,8 +7201,8 @@
         "module_alias": "usb:v1038p1618d0401dc00dsc00dp00ic03isc00ip00in01"
       },
       {
-        "index": 98,
-        "attached_to": 104,
+        "index": 102,
+        "attached_to": 108,
         "class_list": [
           "usb",
           "unknown"
@@ -7114,8 +7289,8 @@
         "module_alias": "usb:v046Dp085Ed0317dcEFdsc02dp01ic03isc00ip00in05"
       },
       {
-        "index": 101,
-        "attached_to": 103,
+        "index": 105,
+        "attached_to": 107,
         "class_list": [
           "usb",
           "unknown"
@@ -7198,8 +7373,8 @@
         "module_alias": "usb:v1235p821Ad0967dcEFdsc02dp01icFFisc01ip20in03"
       },
       {
-        "index": 111,
-        "attached_to": 99,
+        "index": 115,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "unknown"
@@ -7290,8 +7465,8 @@
         "module_alias": "usb:v0B05p19AFd0100dc00dsc00dp00ic03isc00ip00in02"
       },
       {
-        "index": 112,
-        "attached_to": 99,
+        "index": 116,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "unknown"
@@ -7381,8 +7556,8 @@
         "module_alias": "usb:v0B05p1A52d0003dcEFdsc02dp01ic03isc00ip00in07"
       },
       {
-        "index": 116,
-        "attached_to": 99,
+        "index": 120,
+        "attached_to": 103,
         "class_list": [
           "usb",
           "unknown"
@@ -7465,8 +7640,8 @@
         "module_alias": "usb:v0B05p19AFd0100dc00dsc00dp00icFFiscFFipFFin00"
       },
       {
-        "index": 119,
-        "attached_to": 110,
+        "index": 123,
+        "attached_to": 114,
         "class_list": [
           "usb",
           "unknown"
@@ -7557,8 +7732,8 @@
         "module_alias": "usb:v3297p1977d0001dc00dsc00dp00ic03isc00ip00in01"
       },
       {
-        "index": 120,
-        "attached_to": 84,
+        "index": 124,
+        "attached_to": 87,
         "class_list": [
           "usb",
           "unknown"

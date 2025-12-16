@@ -25,36 +25,39 @@
   ];
 
   # Bootloader.
-  boot.kernelPackages = pkgs-stable.linuxPackages_6_12;
+  boot.kernelPackages = pkgs-stable.linuxPackages_6_18;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.kernelModules = [ "amdgpu" ];
 
   # Addtl Hardware configuration
   hardware.amdgpu.overdrive.enable = true;
 
   ## filesystems generated at start; prefer disko next time!
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/5e27d6c5-103b-48c2-9b08-9b6d7d61913e";
-    fsType = "ext4";
-  };
+  ### this means using disko during nixos installation in gui
+  ### or in cli. So next time before a reinstall plan to use
+  ### disko and nixos installer, and then use facter.
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/f8db41bd-3919-4324-9f71-7457559f3ddf";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/479E-CC2E";
-    fsType = "vfat";
-  };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/E49E-D39F";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
 
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/8244c73d-f20c-4ae3-8fe6-eeebc3d51c5f"; }
-  ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/d46e9fee-3667-4b54-a2f2-4422a628280e"; }
+    ];
 
   # Shell, uses zsh
   # from import
   sh.enable = true;
-  # hamp use from import
+  # h use from import
   user = {
     enable = true;
-    name = "hamp";
+    name = "h";
   };
   # Audio from import
   audio = {
@@ -62,12 +65,12 @@
     bluetooth.enable = true;
     packages.enable = true;
     lowLatency.enable = true;
-    recordingSuite.enable = true;
+    recordingSuite.enable = false;
   };
   developer.enable = true;
   screencapture.enable = true;
 
-  networking.hostName = "hamp"; # Define your hostname.
+  networking.hostName = "h"; # Define your hostname.
 
   # Enable wireless networking/lan via network manager
   networking.networkmanager.enable = true;
@@ -93,21 +96,6 @@
   services = {
     # Enable the OpenSSH daemon.
     openssh.enable = true;
-    # lact is for AMD GPU overclocking/gui
-    lact = {
-      enable = true;
-      settings = {
-        version = 5;
-        daemon = {
-          log_level = "info";
-          admin_group = "wheel";
-          disable_clocks_cleanup = false;
-        };
-        apply_settings_timer = 5;
-        current_profile = null;
-        auto_switch_profiles = false;
-      };
-    };
   };
 
   # Allow unfree packages
@@ -122,18 +110,13 @@
   };
   # List packages installed in system profile. To search, run:
   environment.systemPackages = [
-    # keyboard
-    # keymapp # doesn't work
-    # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
     pkgs.util-linux
     pkgs.usbutils
     pkgs.xfce.thunar
-    pkgs.orca-slicer
     pkgs.unzip
     pkgs.wl-clipboard
     pkgs.swappy
-    pkgs.nixos-facter
     ## security
     pkgs.enpass
     pkgs.nettools
@@ -152,11 +135,8 @@
     # launcher
     pkgs.rofi
     # music
-    pkgs.spotify
     # video
-    pkgs.obs-studio
     # image
-    pkgs-stable.gimp-with-plugins
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
@@ -168,24 +148,6 @@
   #   enableSSHSupport = true;
   # };
 
-  # virtualization gui manager
-  programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [ "hamp" ];
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
-
-  programs.direnv = {
-    enable = true;
-    package = pkgs.direnv;
-    silent = false;
-    loadInNixShell = true;
-    # enableZshIntegration = true;
-    nix-direnv = {
-      enable = true;
-      package = pkgs.nix-direnv;
-    };
-  };
-
   # List services that you want to enable:
 
   # This value determines the NixOS release from which the default
@@ -194,6 +156,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 
 }
