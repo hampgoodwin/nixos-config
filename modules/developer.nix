@@ -14,15 +14,13 @@ with lib;
   };
   config = mkIf config.developer.enable {
     environment.systemPackages = with pkgs; [
-      # base languages/compilers
+      # global languages / compilers
       zig # testing out if this will do the c compilation for us?
       # tools
       ## file transfer tools
       wget
-      ## security
       ## command line
       ripgrep
-      git
       tree
       fzf
       fd
@@ -35,9 +33,25 @@ with lib;
       colima
     ];
 
-    programs.neovim = {
-      enable = true;
-      defaultEditor = true;
+    programs = {
+      git = {
+        enable = true;
+        config = {
+          init.defaultBranch = "main";
+          user = {
+            name = "hampgoodwin";
+            email = "hampgoodwin@gmail.com";
+          };
+        };
+      };
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+      neovim = {
+        enable = true;
+        defaultEditor = true;
+      };
     };
 
   };
