@@ -1,7 +1,11 @@
-{ pkgs, config, ... }:
+{
+  inputs,
+  pkgs,
+  pkgs-stable,
+  ...
+}:
 {
   config = {
-
     hardware = {
       graphics.enable = true;
     };
@@ -17,11 +21,13 @@
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/hamp/.steam/root/compatibilitytools.d";
     };
 
-    environment.systemPackages = with pkgs; [
-      protonup
-      lutris
-      bottles
-      mangohud
+    environment.systemPackages = [
+      # deps
+      pkgs.protonup-ng
+      # wine manager
+      pkgs.lutris
+      pkgs.protonplus
+      pkgs.bottles
     ];
   };
 }

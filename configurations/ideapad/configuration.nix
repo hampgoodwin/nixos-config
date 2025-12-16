@@ -6,25 +6,28 @@
   inputs,
   config,
   pkgs,
+  pkgs-stable,
   ...
 }:
 
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration-latitude-7400.nix
+    ./hardware-configuration.nix
     # third-party non-core
     # local import
-    ./audio.nix
-    ./sh.nix
-    ./hamp.nix
-    ./hypr.nix
-    ./steam.nix
+    ../../modules/audio.nix
+    ../../modules/sh.nix
+    ../../modules/hamp.nix
+    ../../modules/hypr.nix
+    ../../modules/steam.nix
     # ./sunshine.nix
-    ./developer.nix
+    ../../modules/developer.nix
+    ../../modules/screencapture.nix
   ];
 
   # Bootloader.
+  boot.kernelPackages = pkgs-stable.linuxPackages_6_12;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -34,18 +37,18 @@
   # latitude-7400 user from import
   user = {
     enable = true;
-    name = "latitude-7400";
+    name = "ideapad";
   };
   # Audio from import
   audio = {
     enable = true;
     bluetooth.enable = true;
-    bluetooth.powerOnBooth = true;
     packages.enable = true;
     lowLatency.enable = true;
     recordingSuite.enable = false;
   };
   developer.enable = true;
+  screencapture.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
 
@@ -76,48 +79,57 @@
     xkb.variant = "";
   };
 
+  # configure stable and unstable packages
+  _module.args.pkgs-stable = import inputs.nixpkgs-stable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    inherit (config.nixpkgs) config;
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ inputs.fh.overlays.default ];
   # Enable flakes and accompanying nix cli tools
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
-    fh
+  environment.systemPackages = [
     # keyboard
+    pkgs.light
     # keymapp # doesn't work
     # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
-    util-linux
-    killall
-    firefox
-    enpass
-    xfce.thunar
-    orca-slicer
-    unzip
-    wl-clipboard
-    filezilla
-    grim
-    swappy
+    pkgs.util-linux
+    pkgs.usbutils
+    pkgs.killall
+    pkgs.firefox
+    pkgs.enpass
+    pkgs.xfce.thunar
+    pkgs-stable.orca-slicer
+    pkgs.unzip
+    pkgs.wl-clipboard
+    pkgs.filezilla
+    pkgs.grim
+    pkgs.swappy
     # communication
-    slack
-    vesktop
-    xwaylandvideobridge
+    pkgs.slack
+    pkgs.kdePackages.xwaylandvideobridge
+    pkgs.obsidian
+    pkgs-stable.discord-ptb
+    # audio
+    pkgs.spotify
     # bar
-    waybar
-    waybar-mpris
+    pkgs.waybar
+    pkgs.waybar-mpris
     # widgets
     # notifications
-    dunst
-    libnotify
+    pkgs.dunst
+    pkgs.libnotify
     # launcher
-    rofi-wayland
+    pkgs.rofi
   ];
 
-  fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

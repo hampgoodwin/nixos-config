@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-stable,
   config,
   ...
 }:
@@ -40,6 +41,7 @@ with lib;
 
       # configure for bluetooth
       wireplumber = {
+        enable = true;
         extraConfig = {
           "monitor.bluez.properties" = {
             "bluez5.enable-sbc-xq" = true;
@@ -66,15 +68,19 @@ with lib;
       };
     };
 
-    environment.systemPackages =
-      with pkgs;
-      mkIf config.audio.packages.enable [
-        wireplumber
-        pavucontrol
-        qpwgraph
-        spotifyd
-        spotify-qt
-      ]
-      // mkIf config.audio.recordingSuite.enable [ bottles ];
+    environment.systemPackages = lib.concatLists [
+      (lib.optionals config.audio.enable [
+        pkgs.pulseaudio
+        pkgs.wireplumber
+        pkgs.pavucontrol
+        pkgs.qpwgraph
+        # pkgs.sonusmix # rmv due to lack of maint
+      ])
+
+      (lib.optionals (config.audio.enable && config.audio.recordingSuite.enable) [
+        pkgs.reaper
+        pkgs.alsa-scarlett-gui
+      ])
+    ];
   };
 }

@@ -1,30 +1,72 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.fh.url = "github:DeterminateSystems/fh";
-  # instead of using fh's nixpkgs (dependencies) we can inform it to follow
-  # nixpkgs to reduce closure size; this means that if a package at a version
-  # exists in both fh and nixpkgs, fh inputs are instructed to follow nixpkgs
-  # builds vs created its own
-  inputs.fh.inputs.nixpkgs.follows = "nixpkgs";
-  # if I want to get into hm we can enable this to get started
-  # inputs.home-manager.url = github:nix-community/home-manager;
-  # inputs.home-manager.nixpkgs.follows = "nixpkgs"; 
+  description = "Hamps Systems <3";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+
+    nix-darwin-pkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nix-darwin-pkgs";
+    mac-app-util.url = "github:hraban/mac-app-util";
+    nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
+  };
 
   outputs =
-    inputs: with inputs; {
-      nixosConfigurations.hamp = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+    {
+      self,
+      nixpkgs,
+      nixpkgs-stable,
+      nix-darwin,
+      mac-app-util,
+      ...
+    }@inputs:
+    let
+      linux = "x86_64-linux";
+      darwin = "aarch64-darwin";
+      pkgs-stable = import inputs.nixpkgs-stable {
+        system = linux;
+        config.allowUnfree = true;
+      };
+      pkgs-stable-darwin = import inputs.nixpkgs-stable {
+        system = darwin;
+        config.allowUnfree = true;
+      };
+    in
+    {
+      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+        system = linux;
         specialArgs = {
           inherit inputs;
+          inherit pkgs-stable;
         };
-        modules = [ ./configuration.nix ];
+        modules = [
+          inputs.nixos-facter-modules.nixosModules.facter
+          { config.facter.reportPath = ./configurations/desktop/facter.json; }
+          ./configurations/desktop/configuration.nix
+        ];
       };
-      nixosConfigurations.latitude-7400 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
+        system = linux;
         specialArgs = {
           inherit inputs;
+          inherit pkgs-stable;
         };
-        modules = [ ./configuration-latitude-7400.nix ];
+        modules = [ ./configurations/ideapad/configuration.nix ];
       };
+      darwinConfigurations.mbp = nix-darwin.lib.darwinSystem {
+        system = darwin;
+        modules = [
+          ./configurations/mbp/configuration.nix
+          mac-app-util.darwinModules.default
+        ];
+        specialArgs = {
+          inherit inputs;
+          inherit pkgs-stable-darwin;
+          inherit self;
+        };
+      };
+
+      darwinPackages = self.darwinConfigurations.mbp.pkgs;
     };
 }
