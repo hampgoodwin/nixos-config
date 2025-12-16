@@ -25,7 +25,6 @@ with lib;
       git
       tree
       fzf
-      eza
       fd
       ## text editors etc
       bat

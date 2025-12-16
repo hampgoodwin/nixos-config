@@ -31,7 +31,6 @@
     ## terminal emulator
     pkgs-stable-darwin.kitty
     # ghostty # busted on aarch64-darwin ;(
-    zellij
 
     ## text editors
     vim
