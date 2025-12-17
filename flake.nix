@@ -2,9 +2,15 @@
   description = "Hamps Systems <3";
 
   inputs = {
+    # use flake parts to enable devShell per system and
+    # manage flakes
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # canonical nixpkgs stable and unstable
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
+    # nix-darwin for darwin system based flakes
     nix-darwin-pkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nix-darwin-pkgs";
@@ -13,60 +19,94 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
+      flake-parts,
       nixpkgs,
       nixpkgs-stable,
       nix-darwin,
       mac-app-util,
       ...
-    }@inputs:
-    let
-      linux = "x86_64-linux";
-      darwin = "aarch64-darwin";
-      pkgs-stable = import inputs.nixpkgs-stable {
-        system = linux;
-        config.allowUnfree = true;
-      };
-      pkgs-stable-darwin = import inputs.nixpkgs-stable {
-        system = darwin;
-        config.allowUnfree = true;
-      };
-    in
-    {
-      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-        system = linux;
-        specialArgs = {
-          inherit inputs;
-          inherit pkgs-stable;
-        };
-        modules = [
-          inputs.nixos-facter-modules.nixosModules.facter
-          { config.facter.reportPath = ./configurations/desktop/facter.json; }
-          ./configurations/desktop/configuration.nix
-        ];
-      };
-      nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
-        system = linux;
-        specialArgs = {
-          inherit inputs;
-          inherit pkgs-stable;
-        };
-        modules = [ ./configurations/ideapad/configuration.nix ];
-      };
-      darwinConfigurations.mbp = nix-darwin.lib.darwinSystem {
-        system = darwin;
-        modules = [
-          ./configurations/mbp/configuration.nix
-          mac-app-util.darwinModules.default
-        ];
-        specialArgs = {
-          inherit inputs;
-          inherit pkgs-stable-darwin;
-          inherit self;
-        };
-      };
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      top@{
+        config,
+        withSystem,
+        moduleWithSystem,
+        ...
+      }:
+      {
+        imports = [ ];
+        flake =
+          let
+            linux = "x86_64-linux";
+            darwin = "aarch64-darwin";
+            pkgs-stable = import inputs.nixpkgs-stable {
+              system = linux;
+              config.allowUnfree = true;
+            };
+            pkgs-stable-darwin = import inputs.nixpkgs-stable {
+              system = darwin;
+              config.allowUnfree = true;
+            };
+          in
+          {
+            nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+              system = linux;
+              specialArgs = {
+                inherit inputs;
+                inherit pkgs-stable;
+              };
+              modules = [
+                inputs.nixos-facter-modules.nixosModules.facter
+                { config.facter.reportPath = ./configurations/desktop/facter.json; }
+                ./configurations/desktop/configuration.nix
+              ];
+            };
+            nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
+              system = linux;
+              specialArgs = {
+                inherit inputs;
+                inherit pkgs-stable;
+              };
+              modules = [ ./configurations/ideapad/configuration.nix ];
+            };
+            darwinConfigurations.mbp = nix-darwin.lib.darwinSystem {
+              system = darwin;
+              modules = [
+                ./configurations/mbp/configuration.nix
+                mac-app-util.darwinModules.default
+              ];
+              specialArgs = {
+                inherit inputs;
+                inherit pkgs-stable-darwin;
+                inherit self;
+              };
+            };
 
-      darwinPackages = self.darwinConfigurations.mbp.pkgs;
-    };
+            darwinPackages = self.darwinConfigurations.mbp.pkgs;
+
+          };
+        systems = [
+          "x86_64-linux"
+          "aarch64-darwin"
+        ];
+        perSystem =
+          { config, pkgs, ... }:
+          {
+            devShells.default = pkgs.mkShell {
+              packages = with pkgs; [
+                # languages and their tools
+                ## nix
+                nixd
+                nixfmt-rfc-style
+                ## bash
+                bash-language-server
+                ### util tools
+                typos-lsp
+              ];
+            };
+          };
+      }
+    );
 }

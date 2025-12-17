@@ -93,55 +93,43 @@
     "flakes"
   ];
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     # keyboard
-    pkgs.light
+    light
     # keymapp # doesn't work
     # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
-    pkgs.util-linux
-    pkgs.usbutils
-    pkgs.killall
-    pkgs.firefox
-    pkgs.enpass
-    pkgs.xfce.thunar
-    pkgs-stable.orca-slicer
-    pkgs.unzip
-    pkgs.wl-clipboard
-    pkgs.filezilla
-    pkgs.grim
-    pkgs.swappy
+    util-linux
+    usbutils
+    killall
+    firefox
+    enpass
+    xfce.thunar
+    stable.orca-slicer
+    unzip
+    wl-clipboard
+    filezilla
+    grim
+    swappy
     # communication
-    pkgs.slack
-    pkgs.kdePackages.xwaylandvideobridge
-    pkgs.obsidian
+    slack
+    kdePackages.xwaylandvideobridge
+    obsidian
     pkgs-stable.discord-ptb
     # audio
-    pkgs.spotify
+    spotify
     # bar
-    pkgs.waybar
-    pkgs.waybar-mpris
+    waybar
+    waybar-mpris
     # widgets
     # notifications
-    pkgs.dunst
-    pkgs.libnotify
+    dunst
+    libnotify
     # launcher
-    pkgs.rofi
+    rofi
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

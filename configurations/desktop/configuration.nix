@@ -36,20 +36,23 @@
   ### this means using disko during nixos installation in gui
   ### or in cli. So next time before a reinstall plan to use
   ### disko and nixos installer, and then use facter.
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/f8db41bd-3919-4324-9f71-7457559f3ddf";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/f8db41bd-3919-4324-9f71-7457559f3ddf";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/E49E-D39F";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/d46e9fee-3667-4b54-a2f2-4422a628280e"; }
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/E49E-D39F";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
     ];
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/d46e9fee-3667-4b54-a2f2-4422a628280e"; }
+  ];
 
   # Shell, uses zsh
   # from import
@@ -93,11 +96,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services = {
-    # Enable the OpenSSH daemon.
-    openssh.enable = true;
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -109,46 +107,43 @@
     ];
   };
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     # utilities
-    pkgs.util-linux
-    pkgs.usbutils
-    pkgs.xfce.thunar
-    pkgs.unzip
-    pkgs.wl-clipboard
-    pkgs.swappy
+    util-linux
+    usbutils
+    xfce.thunar
+    unzip
+    wl-clipboard
+    swappy
     ## security
-    pkgs.enpass
-    pkgs.nettools
+    enpass
+    nettools
     # communication
-    pkgs.firefox
-    pkgs.slack
-    pkgs.vesktop
-    pkgs.obsidian
-    # bar
-    pkgs.waybar
-    pkgs.waybar-mpris
-    # widgets
-    # notifications
-    pkgs.dunst
-    pkgs.libnotify
-    # launcher
-    pkgs.rofi
-    # music
-    # video
-    # image
+    firefox
+    slack
+    vesktop
+    obsidian
+    # display, window, etc...
+    ## bar
+    waybar
+    waybar-mpris
+    ## notifications
+    dunst
+    libnotify
+    ## launcher
+    rofi
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
-  # List services that you want to enable:
+  services = {
+    sunshine = {
+      enabled = true;
+      autoStart = true;
+      capSysAdmin = true;
+      openFirewall = true;
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -5,7 +5,6 @@
   ...
 }:
 {
-  # users
   users.users = {
     hamp = {
       shell = pkgs.zsh;
@@ -13,29 +12,13 @@
       home = "/Users/hamp";
     };
   };
-
   # allow unfree software
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    # global user space
-    git
-    fzf
-    ripgrep
-    jq
-    tree
-
-    # developer toolings
-    ## terminal emulator
-    pkgs-stable-darwin.kitty
-    # ghostty # busted on aarch64-darwin ;(
-
     ## text editors
-    vim
-    bat
-    neovim
     obsidian
 
     ### lua
@@ -86,25 +69,6 @@
 
   # i use determinate nix which manages nix
   nix.enable = false;
-
-  programs = {
-    zsh = {
-      enable = true; # default shell on catalina
-      enableFzfGit = true;
-      enableFzfHistory = true;
-    };
-    direnv = {
-      enable = true;
-      package = pkgs.direnv;
-      silent = false;
-      loadInNixShell = true;
-      # enableZshIntegration = true;
-      nix-direnv = {
-        enable = true;
-        package = pkgs.nix-direnv;
-      };
-    };
-  };
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = self.rev or self.dirtyRev or null;
