@@ -136,9 +136,10 @@
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
+  # List services that you want to enable:
   services = {
     sunshine = {
-      enabled = true;
+      enable = true;
       autoStart = true;
       capSysAdmin = true;
       openFirewall = true;
