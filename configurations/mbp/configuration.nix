@@ -18,7 +18,10 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    # terminal emulator
+    kitty
     ## text editors
+    neovim
     obsidian
 
     ### lua
@@ -31,18 +34,15 @@
     nixd
 
     ## tools
+    git
     fd
     zoxide
 
     # applications
-    # firefox
     vesktop
     slack
     zoom-us
-    ## security
-    #wireguard # install gui in mac via appstore
-    #enpass # install gui in mac via appstore
-    ## efficiency
+    gemini-cli
     ## window manager
     aerospace
     jankyborders # use to highlight active windows more clearly
@@ -65,6 +65,12 @@
     };
     loginwindow.GuestEnabled = false;
     NSGlobalDomain.AppleICUForce24HourTime = false;
+  };
+  programs = {
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 
   # i use determinate nix which manages nix
