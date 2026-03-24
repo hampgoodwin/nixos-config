@@ -28,7 +28,6 @@ with lib;
         fzf
         fd
         ## text editors etc
-        bat
         kitty
         ## containers
         docker
@@ -50,18 +49,6 @@ with lib;
           defaultEditor = true;
         };
       }
-      # (lib.mkIf pkgs.stdenv.isLinux {
-      #   git = {
-      #     enable = true;
-      #     config = {
-      #       init.defaultBranch = "main";
-      #       user = {
-      #         name = "hampgoodwin";
-      #         email = "hampgoodwin@gmail.com";
-      #       };
-      #     };
-      #   };
-      # })
     ];
 
     services = {

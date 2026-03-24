@@ -19,7 +19,8 @@
     ../../modules/audio.nix
     ../../modules/sh.nix
     ../../modules/hamp.nix
-    ../../modules/hypr.nix
+    # ../../modules/hypr.nix
+    ../../modules/niri.nix
     ../../modules/steam.nix
     # ./sunshine.nix
     ../../modules/developer.nix
@@ -97,36 +98,13 @@
     # keyboard
     light
     # keymapp # doesn't work
-    # zsa-udev-rules # doesn't work; add custom udev rules?
     # utilities
     util-linux
     usbutils
     killall
     firefox
     enpass
-    xfce.thunar
-    stable.orca-slicer
     unzip
-    wl-clipboard
-    filezilla
-    grim
-    swappy
-    # communication
-    slack
-    kdePackages.xwaylandvideobridge
-    obsidian
-    pkgs-stable.discord-ptb
-    # audio
-    spotify
-    # bar
-    waybar
-    waybar-mpris
-    # widgets
-    # notifications
-    dunst
-    libnotify
-    # launcher
-    rofi
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
@@ -138,5 +116,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
