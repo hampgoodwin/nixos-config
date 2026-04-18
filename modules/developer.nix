@@ -34,7 +34,7 @@ with lib;
         colima
       ]
       # linux only and not darwin pkgs
-      ++ lib.stdenv.isLinux [
+      ++ lib.optionals pkgs.stdenv.isLinux [
 
       ];
 
