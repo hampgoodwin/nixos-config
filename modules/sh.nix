@@ -12,7 +12,7 @@ with lib;
   config = mkIf config.sh.enable {
     programs.zsh = {
       enable = true;
-      loginShellInit = "Hyprland";
+      loginShellInit = "start-hyprland";
     };
   };
 }

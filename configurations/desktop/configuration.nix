@@ -68,7 +68,7 @@
     bluetooth.enable = true;
     packages.enable = true;
     lowLatency.enable = true;
-    recordingSuite.enable = false;
+    recordingSuite.enable = true;
   };
   developer.enable = true;
   screencapture.enable = true;
@@ -111,7 +111,7 @@
     # utilities
     util-linux
     usbutils
-    xfce.thunar
+    thunar
     unzip
     wl-clipboard
     swappy
@@ -122,6 +122,8 @@
     firefox
     slack
     vesktop
+    discord
+    discord-ptb
     obsidian
     # display, window, etc...
     ## bar
@@ -136,14 +138,56 @@
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
+  programs.git = {
+    enable = true;
+  };
+
   # List services that you want to enable:
   services = {
-    sunshine = {
-      enable = true;
-      autoStart = true;
-      capSysAdmin = true;
-      openFirewall = true;
-    };
+    # sunshine = {
+    #   enable = true;
+    #   autoStart = true;
+    #   capSysAdmin = true;
+    #   openFirewall = true;
+    #   applications = {
+    #     apps = [
+    #       {
+    #         image-path = "desktop.png";
+    #         name = "Desktop";
+    #       }
+    #       {
+    #         image-path = "desktop.png";
+    #         name = "Low Res Desktop";
+    #         prep-cmd = [
+    #           {
+    #             do = "xrandr --output HDMI-1 --mode 1920x1080";
+    #             undo = "xrandr --output HDMI-1 --mode 1920x1200";
+    #           }
+    #         ];
+    #       }
+    #       {
+    #         auto-detach = true;
+    #         detached = [
+    #           "setsid steam steam://open/bigpicture"
+    #         ];
+    #         exclude-global-prep-cmd = false;
+    #         exit-timeout = 5;
+    #         image-path = "steam.png";
+    #         name = "Steam Little Picture";
+    #         prep-cmd = [
+    #           {
+    #             do = "";
+    #             undo = "setsid steam steam://close/bigpicture";
+    #           }
+    #         ];
+    #         wait-all = true;
+    #       }
+    #     ];
+    #     env = {
+    #       PATH = "$(PATH):$(HOME)/.local/bin";
+    #     };
+    #   };
+    # };
   };
 
   # This value determines the NixOS release from which the default
