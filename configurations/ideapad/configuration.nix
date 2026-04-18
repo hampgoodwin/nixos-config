@@ -19,8 +19,9 @@
     ../../modules/audio.nix
     ../../modules/sh.nix
     ../../modules/hamp.nix
+    ../../modules/greetd.nix
     # ../../modules/hypr.nix
-    ../../modules/niri.nix
+    ../../modules/niri-noctalia.nix
     ../../modules/steam.nix
     # ./sunshine.nix
     ../../modules/developer.nix

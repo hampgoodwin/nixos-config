@@ -17,7 +17,9 @@
     ../../modules/audio.nix
     ../../modules/sh.nix
     ../../modules/hamp.nix
-    ../../modules/hypr.nix
+    ../../modules/greetd.nix
+    # ../../modules/hypr.nix
+    ../../modules/niri-noctalia.nix
     ../../modules/steam.nix
     # ../../modules/sunshine.nix
     ../../modules/developer.nix
@@ -128,13 +130,13 @@
     obsidian
     # display, window, etc...
     ## bar
-    waybar
-    waybar-mpris
+    # waybar
+    # waybar-mpris
     ## notifications
-    dunst
+    # dunst
     libnotify
     ## launcher
-    rofi
+    # rofi
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];

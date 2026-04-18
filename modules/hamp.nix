@@ -19,8 +19,8 @@ with lib;
 
   config = mkIf config.user.enable {
     # enable the user
-    # Enable automatic login for the user.
-    services.getty.autologinUser = "${config.user.name}";
+    # We now use greetd for login, so disable TTY autologin
+    # services.getty.autologinUser = "${config.user.name}";
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.defaultUserShell = pkgs.zsh;
