@@ -10,6 +10,7 @@ with lib;
   options = {
     developer = {
       enable = mkEnableOption "enable developer applications";
+      ai.enable = mkEnableOption "enable ai tools";
     };
   };
   config = mkIf config.developer.enable {
@@ -36,6 +37,9 @@ with lib;
       # linux only and not darwin pkgs
       ++ lib.optionals pkgs.stdenv.isLinux [
 
+      ]
+      ++ lib.optionals config.developer.ai.enable [
+        gemini-cli
       ];
 
     programs = lib.mkMerge [

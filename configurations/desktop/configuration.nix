@@ -71,6 +71,7 @@
     recordingSuite.enable = true;
   };
   developer.enable = true;
+  developer.ai.enable = true;
   screencapture.enable = true;
 
   networking.hostName = "h"; # Define your hostname.
