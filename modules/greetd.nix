@@ -6,7 +6,7 @@
     settings = {
       default_session = {
         # tuigreet lets you choose your session and remembers your last choice.
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --remember --remember-session --sessions /run/current-system/sw/share/wayland-sessions --cmd niri-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --remember --remember-session --sessions /run/current-system/sw/share/wayland-sessions --cmd niri-session";
         user = "greeter";
       };
     };

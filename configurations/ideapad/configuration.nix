@@ -20,12 +20,9 @@
     ../../modules/sh.nix
     ../../modules/hamp.nix
     ../../modules/greetd.nix
-    # ../../modules/hypr.nix
     ../../modules/niri-noctalia.nix
     ../../modules/steam.nix
-    # ./sunshine.nix
     ../../modules/developer.nix
-    ../../modules/screencapture.nix
   ];
 
   # Bootloader.
@@ -50,7 +47,7 @@
     recordingSuite.enable = false;
   };
   developer.enable = true;
-  screencapture.enable = true;
+  developer.ai.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
 

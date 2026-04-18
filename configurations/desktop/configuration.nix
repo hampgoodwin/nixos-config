@@ -18,12 +18,9 @@
     ../../modules/sh.nix
     ../../modules/hamp.nix
     ../../modules/greetd.nix
-    # ../../modules/hypr.nix
     ../../modules/niri-noctalia.nix
     ../../modules/steam.nix
-    # ../../modules/sunshine.nix
     ../../modules/developer.nix
-    ../../modules/screencapture.nix
   ];
 
   # Bootloader.
@@ -74,7 +71,6 @@
   };
   developer.enable = true;
   developer.ai.enable = true;
-  screencapture.enable = true;
 
   networking.hostName = "h"; # Define your hostname.
 
@@ -114,29 +110,15 @@
     # utilities
     util-linux
     usbutils
-    thunar
     unzip
-    wl-clipboard
-    swappy
     ## security
     enpass
     nettools
     # communication
     firefox
-    slack
     vesktop
-    discord
-    discord-ptb
     obsidian
-    # display, window, etc...
-    ## bar
-    # waybar
-    # waybar-mpris
-    ## notifications
-    # dunst
-    libnotify
-    ## launcher
-    # rofi
+    # music
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
