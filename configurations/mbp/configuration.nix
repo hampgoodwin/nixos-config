@@ -30,7 +30,7 @@
     lua-language-server
     stylua
     ### nix
-    nixfmt-rfc-style
+    nixfmt
     nixd
 
     ## tools

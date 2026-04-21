@@ -110,7 +110,7 @@
                 # languages and their tools
                 ## nix
                 nixd
-                nixfmt-rfc-style
+                nixfmt
                 ## bash
                 bash-language-server
                 ### util tools
