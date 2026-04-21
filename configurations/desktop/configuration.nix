@@ -80,6 +80,12 @@
   # Set your time zone.
   time.timeZone = "America/Denver";
 
+  # Configure keymap in X11
+  services.xserver = {
+    xkb.layout = "us";
+    xkb.variant = "";
+  };
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -128,52 +134,6 @@
   };
 
   # List services that you want to enable:
-  services = {
-    # sunshine = {
-    #   enable = true;
-    #   autoStart = true;
-    #   capSysAdmin = true;
-    #   openFirewall = true;
-    #   applications = {
-    #     apps = [
-    #       {
-    #         image-path = "desktop.png";
-    #         name = "Desktop";
-    #       }
-    #       {
-    #         image-path = "desktop.png";
-    #         name = "Low Res Desktop";
-    #         prep-cmd = [
-    #           {
-    #             do = "xrandr --output HDMI-1 --mode 1920x1080";
-    #             undo = "xrandr --output HDMI-1 --mode 1920x1200";
-    #           }
-    #         ];
-    #       }
-    #       {
-    #         auto-detach = true;
-    #         detached = [
-    #           "setsid steam steam://open/bigpicture"
-    #         ];
-    #         exclude-global-prep-cmd = false;
-    #         exit-timeout = 5;
-    #         image-path = "steam.png";
-    #         name = "Steam Little Picture";
-    #         prep-cmd = [
-    #           {
-    #             do = "";
-    #             undo = "setsid steam steam://close/bigpicture";
-    #           }
-    #         ];
-    #         wait-all = true;
-    #       }
-    #     ];
-    #     env = {
-    #       PATH = "$(PATH):$(HOME)/.local/bin";
-    #     };
-    #   };
-    # };
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
