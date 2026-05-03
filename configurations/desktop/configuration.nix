@@ -24,7 +24,7 @@
   ];
 
   # Bootloader.
-  boot.kernelPackages = pkgs-stable.linuxPackages_6_18;
+  boot.kernelPackages = pkgs.linuxPackages_7_0;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -119,8 +119,10 @@
     unzip
     ## security
     enpass
+    proton-pass
     nettools
     # communication
+    protonmail-desktop
     firefox
     vesktop
     obsidian

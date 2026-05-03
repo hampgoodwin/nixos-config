@@ -8,7 +8,7 @@
 
     # canonical nixpkgs stable and unstable
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     # nix-darwin for darwin system based flakes
     nix-darwin-pkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
