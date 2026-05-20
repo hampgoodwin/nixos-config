@@ -125,6 +125,7 @@
     protonmail-desktop
     firefox
     vesktop
+    discord-canary
     obsidian
     # music
   ];

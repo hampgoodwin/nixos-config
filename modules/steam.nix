@@ -26,7 +26,7 @@
       # deps
       pkgs.protonup-ng
       # wine manager
-      pkgs-stable.lutris
+      pkgs.lutris
       pkgs.protonplus
     ];
   };
