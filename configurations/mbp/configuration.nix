@@ -24,15 +24,6 @@
     neovim
     obsidian
 
-    ### lua
-    lua
-    luajitPackages.luarocks
-    lua-language-server
-    stylua
-    ### nix
-    nixfmt
-    nixd
-
     ## tools
     git
     fd
