@@ -124,10 +124,10 @@
     # communication
     protonmail-desktop
     firefox
-    vesktop
     discord-canary
     obsidian
     # music
+    qbz
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
