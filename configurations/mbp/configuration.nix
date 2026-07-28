@@ -5,6 +5,9 @@
   ...
 }:
 {
+  imports = [
+    ../../modules/developer.nix
+  ];
   users.users = {
     hamp = {
       shell = pkgs.zsh;
@@ -15,25 +18,25 @@
   # allow unfree software
   nixpkgs.config.allowUnfree = true;
 
+  # developer module
+  developer.enable = true;
+  developer.ai.enable = true;
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    # terminal emulator
-    kitty
     ## text editors
     neovim
     obsidian
 
     ## tools
     git
-    fd
     zoxide
+    protonmail-desktop
 
     # applications
-    vesktop
     slack
     zoom-us
-    gemini-cli
     ## window manager
     aerospace
     jankyborders # use to highlight active windows more clearly

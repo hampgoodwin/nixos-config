@@ -42,20 +42,20 @@ with lib;
         gemini-cli
       ];
 
-    programs = lib.mkMerge [
-      {
-        direnv = {
-          enable = true;
-          nix-direnv.enable = true;
-        };
-        neovim = {
-          enable = true;
-          defaultEditor = true;
-        };
-      }
-    ];
+    programs = {
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+    }
+    // (lib.optionalAttrs pkgs.stdenv.isLinux {
+      neovim = {
+        enable = true;
+        defaultEditor = true;
+      };
+    });
 
-    services = {
+    services = lib.optionalAttrs pkgs.stdenv.isLinux {
       # Enable the OpenSSH daemon.
       openssh.enable = true;
     };
