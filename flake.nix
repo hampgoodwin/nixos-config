@@ -16,7 +16,6 @@
     nix-darwin.inputs.nixpkgs.follows = "nix-darwin-pkgs";
     mac-app-util.url = "github:hraban/mac-app-util";
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
-    niri.url = "github:sodiboo/niri-flake";
     noctalia.url = "github:noctalia-dev/noctalia-shell";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -29,7 +28,6 @@
       nixpkgs-stable,
       nix-darwin,
       mac-app-util,
-      niri,
       noctalia,
       ...
     }:
@@ -64,7 +62,6 @@
               };
               modules = [
                 inputs.nixos-facter-modules.nixosModules.facter
-                inputs.niri.nixosModules.niri
                 inputs.noctalia.nixosModules.default
                 { config.facter.reportPath = ./configurations/desktop/facter.json; }
                 ./configurations/desktop/configuration.nix
@@ -77,7 +74,6 @@
                 inherit pkgs-stable;
               };
               modules = [
-                inputs.niri.nixosModules.niri
                 inputs.noctalia.nixosModules.default
                 ./configurations/ideapad/configuration.nix
               ];

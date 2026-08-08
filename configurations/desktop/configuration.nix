@@ -136,6 +136,8 @@
     enable = true;
   };
 
+  security.polkit.enable = true;
+
   # List services that you want to enable:
 
   # This value determines the NixOS release from which the default

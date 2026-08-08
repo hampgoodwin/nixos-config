@@ -9,6 +9,5 @@
 
   environment.systemPackages = with pkgs; [
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    xwayland-satellite # for X11 app support in Niri
   ];
 }
