@@ -13,6 +13,7 @@ with lib;
       ai.enable = mkEnableOption "enable ai tools";
     };
   };
+
   config = mkIf config.developer.enable {
     environment.systemPackages =
       with pkgs;
@@ -40,6 +41,7 @@ with lib;
       ]
       ++ lib.optionals config.developer.ai.enable [
         gemini-cli
+        antigravity-cli
       ];
 
     programs = {
@@ -47,15 +49,14 @@ with lib;
         enable = true;
         nix-direnv.enable = true;
       };
-    }
-    // (lib.optionalAttrs pkgs.stdenv.isLinux {
-      neovim = {
+      
+      neovim = mkIf pkgs.stdenv.isLinux {
         enable = true;
         defaultEditor = true;
       };
-    });
+    };
 
-    services = lib.optionalAttrs pkgs.stdenv.isLinux {
+    services = mkIf pkgs.stdenv.isLinux {
       # Enable the OpenSSH daemon.
       openssh.enable = true;
     };
