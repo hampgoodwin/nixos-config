@@ -13,7 +13,6 @@ with lib;
       enable = mkEnableOption "enable audio";
       bluetooth.enable = mkEnableOption "enable bluetooth";
       packages.enable = mkEnableOption "enable audio packages";
-      lowLatency.enable = mkEnableOption "low latency";
       recordingSuite.enable = mkEnableOption "recording suite";
     };
   };
@@ -25,9 +24,8 @@ with lib;
       powerOnBoot = true;
       settings.General.Enable = "Source,Sink,Media,Socket";
     };
-
-    # rtkit is optional but recommended
-    security.rtkit.enable = true;
+    boot.kernelModules = [ "v4l2loopback" ];
+    boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
 
     # system packages
     # pipewire
@@ -56,16 +54,6 @@ with lib;
           };
         };
       };
-
-      # configure extra low latency
-      extraConfig.pipewire."92-low-latency" = mkIf config.audio.lowLatency.enable {
-        context.properties = {
-          default.clock.rate = 48000;
-          default.clock.quantum = 32;
-          default.clock.min-quantum = 32;
-          default.clock.max-quantum = 32;
-        };
-      };
     };
 
     environment.systemPackages = lib.concatLists [
@@ -80,7 +68,16 @@ with lib;
       (lib.optionals (config.audio.enable && config.audio.recordingSuite.enable) [
         pkgs.reaper
         pkgs.alsa-scarlett-gui
+        pkgs.neural-amp-modeler-lv2
+        pkgs.calf
+        pkgs.lsp-plugins
       ])
     ];
+
+    programs.obs-studio = mkIf config.audio.recordingSuite.enable {
+      enable = true;
+      enableVirtualCamera = true;
+    };
+
   };
 }

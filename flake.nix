@@ -18,6 +18,7 @@
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
     noctalia.url = "github:noctalia-dev/noctalia-shell";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
+    musnix.url = "github:musnix/musnix";
   };
 
   outputs =
@@ -64,6 +65,7 @@
                 inputs.nixos-facter-modules.nixosModules.facter
                 inputs.noctalia.nixosModules.default
                 { config.facter.reportPath = ./configurations/desktop/facter.json; }
+                inputs.musnix.nixosModules.musnix
                 ./configurations/desktop/configuration.nix
               ];
             };

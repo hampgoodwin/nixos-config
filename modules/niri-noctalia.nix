@@ -9,5 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    xwayland-satellite # Provides X11 support for applications like Steam under Niri
   ];
 }
+

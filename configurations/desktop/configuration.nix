@@ -24,7 +24,6 @@
   ];
 
   # Bootloader.
-  boot.kernelPackages = pkgs.linuxPackages_7_1;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -66,8 +65,16 @@
     enable = true;
     bluetooth.enable = true;
     packages.enable = true;
-    lowLatency.enable = true;
     recordingSuite.enable = true;
+  };
+  musnix = {
+    enable = true;
+    kernel.realtime = true;
+    kernel.packages = pkgs.linuxPackages_7_2;
+    rtirq = {
+      enable = true;
+      nameList = "usb snd rtc i8042";
+    };
   };
   developer.enable = true;
   developer.ai.enable = true;
@@ -126,8 +133,11 @@
     firefox
     discord-canary
     obsidian
-    # music
+    # music / video
     qbz
+    vlc
+    # media
+    jellyfin-desktop
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];

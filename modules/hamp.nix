@@ -30,6 +30,8 @@ with lib;
       extraGroups = [
         "networkmanager"
         "wheel"
+        "gamemode"
+        "audio"
       ];
     };
   };
