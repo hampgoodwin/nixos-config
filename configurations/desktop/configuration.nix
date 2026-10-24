@@ -131,10 +131,9 @@
     # communication
     protonmail-desktop
     firefox
-    discord-canary
+    discord
     obsidian
     # music / video
-    qbz
     vlc
     # media
     jellyfin-desktop

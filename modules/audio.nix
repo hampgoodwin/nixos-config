@@ -22,7 +22,6 @@ with lib;
     hardware.bluetooth = mkIf config.audio.bluetooth.enable {
       enable = true;
       powerOnBoot = true;
-      settings.General.Enable = "Source,Sink,Media,Socket";
     };
     boot.kernelModules = [ "v4l2loopback" ];
     boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
@@ -52,6 +51,23 @@ with lib;
               "hfp_ag"
             ];
           };
+        };
+      };
+
+      extraConfig = {
+        pipewire."99-reaper-discord-mic" = {
+          "context.objects" = [
+            {
+              factory = "adapter";
+              args = {
+                "factory.name" = "support.null-audio-sink";
+                "node.name" = "ReaperDiscordMic";
+                "node.description" = "Reaper Discord Bus";
+                "media.class" = "Audio/Source/Virtual";
+                "audio.position" = "FL,FR";
+              };
+            }
+          ];
         };
       };
     };
