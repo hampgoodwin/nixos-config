@@ -26,6 +26,15 @@ with lib;
     boot.kernelModules = [ "v4l2loopback" ];
     boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
 
+    nixpkgs.overlays = [
+      (final: prev: {
+        reaper = prev.reaper.overrideAttrs (oldAttrs: {
+          # Workaround for patchelf 0.19.2 segment alignment issue causing dl_main segfault
+          patchelfFlags = (oldAttrs.patchelfFlags or [ ]) ++ [ "--page-size" "2097152" ];
+        });
+      })
+    ];
+
     # system packages
     # pipewire
     services.pipewire = {

@@ -70,7 +70,7 @@
   musnix = {
     enable = true;
     kernel.realtime = true;
-    kernel.packages = pkgs.linuxPackages_7_2;
+    kernel.packages = pkgs.linuxPackages_7_3;
     rtirq = {
       enable = true;
       nameList = "usb snd rtc i8042";
