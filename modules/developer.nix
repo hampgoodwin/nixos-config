@@ -37,7 +37,7 @@ with lib;
         colima
       ]
       # linux only and not darwin pkgs
-      ++ lib.optionals pkgs.stdenv.isLinux [
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
         kitty
       ]
       ++ lib.optionals config.developer.ai.enable [
@@ -50,14 +50,14 @@ with lib;
         enable = true;
         nix-direnv.enable = true;
       };
-
-      neovim = mkIf pkgs.stdenv.isLinux {
+    } // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+      neovim = {
         enable = true;
         defaultEditor = true;
       };
     };
 
-    services = mkIf pkgs.stdenv.isLinux {
+    services = mkIf pkgs.stdenv.hostPlatform.isLinux {
       # Enable the OpenSSH daemon.
       openssh.enable = true;
     };
