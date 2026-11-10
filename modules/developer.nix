@@ -24,24 +24,25 @@ with lib;
         ## file transfer tools
         wget
         ## command line
+        kitty-bin
         gnumake
         ripgrep
         tree
         fzf
         fd
         ## text editors etc
-        kitty
+        tree-sitter
         ## containers
         docker
         colima
       ]
       # linux only and not darwin pkgs
       ++ lib.optionals pkgs.stdenv.isLinux [
-
+        kitty
       ]
       ++ lib.optionals config.developer.ai.enable [
-        gemini-cli
         antigravity-cli
+        antigravity-acp
       ];
 
     programs = {
@@ -49,7 +50,7 @@ with lib;
         enable = true;
         nix-direnv.enable = true;
       };
-      
+
       neovim = mkIf pkgs.stdenv.isLinux {
         enable = true;
         defaultEditor = true;
