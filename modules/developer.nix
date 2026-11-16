@@ -42,7 +42,6 @@ with lib;
       ]
       ++ lib.optionals config.developer.ai.enable [
         antigravity-cli
-        antigravity-acp
       ];
 
     programs = {
@@ -50,7 +49,8 @@ with lib;
         enable = true;
         nix-direnv.enable = true;
       };
-    } // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    }
+    // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
       neovim = {
         enable = true;
         defaultEditor = true;
