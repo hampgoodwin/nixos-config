@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  options,
   ...
 }:
 
@@ -24,7 +25,6 @@ with lib;
         ## file transfer tools
         wget
         ## command line
-        kitty-bin
         gnumake
         ripgrep
         tree
@@ -40,6 +40,10 @@ with lib;
       ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
         kitty
       ]
+      # darwin only pkgs
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+        kitty-bin
+      ]
       ++ lib.optionals config.developer.ai.enable [
         antigravity-cli
       ];
@@ -50,7 +54,7 @@ with lib;
         nix-direnv.enable = true;
       };
     }
-    // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    // lib.optionalAttrs (options.programs ? neovim) {
       neovim = {
         enable = true;
         defaultEditor = true;
